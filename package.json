@@ -1,0 +1,30 @@
+{
+  "name": "mongoose-schema-jsonschema",
+  "version": "0.0.1",
+  "description": "mongoose.Schema extention with mehtod jsonShema",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DScheglov/mongoose-schema-jsonschema.git"
+  },
+  "keywords": [
+    "jsonschema",
+    "json",
+    "schema",
+    "mongoose"
+  ],
+  "author": "Dmitry Scheglov <Dmitry.Scheglov@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DScheglov/mongoose-schema-jsonschema/issues"
+  },
+  "homepage": "https://github.com/DScheglov/mongoose-schema-jsonschema#readme",
+  "devDependencies": {
+    "jsonschema": "^1.1.0",
+    "mocha": "^3.1.0",
+    "mongoose": "^4.6.1"
+  }
+}
