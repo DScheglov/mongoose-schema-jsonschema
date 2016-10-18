@@ -1,3 +1,4 @@
+'use strict';
 
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
@@ -9,6 +10,11 @@ var BookSchema = new Schema({
 		type: [{type: Schema.Types.ObjectId, required: true, ref: 'Person'}],
 		index: true
 	},
+  comment: [{
+    body: String,
+    editor: {type: Schema.Types.ObjectId, required: true, ref: 'Person'}
+  }],
+  publisher: {type: Schema.Types.ObjectId, required: true, ref: 'Person'},
 	description: String
 });
 

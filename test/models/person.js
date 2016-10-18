@@ -1,3 +1,5 @@
+'use strict';
+
 var async = require("async");
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;

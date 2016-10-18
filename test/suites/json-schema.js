@@ -1,3 +1,5 @@
+'use strict';
+
 var mongoose = require('../../index')(require('mongoose'));
 var validate = require('jsonschema').validate;
 var assert = require('assert');
