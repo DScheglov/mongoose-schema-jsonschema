@@ -8,7 +8,8 @@ var BookSchema = new Schema({
 	year: {type: Number, required: true, index: true},
 	author: {
 		type: [{type: Schema.Types.ObjectId, required: true, ref: 'Person'}],
-		index: true
+		index: true,
+    required: true
 	},
   comment: [{
     body: String,
