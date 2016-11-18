@@ -4,7 +4,7 @@
   "description": "mongoose.Schema extention with mehtod jsonShema",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "NODE_ENV=test istanbul cover _mocha -- -R spec"
   },
   "repository": {
     "type": "git",

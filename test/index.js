@@ -1,3 +1,5 @@
 'use strict';
 
-require('./suites/json-schema');
+require('./suites/schema-translation');
+require('./suites/validation');
+require('./suites/selection');

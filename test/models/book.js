@@ -11,10 +11,10 @@ var BookSchema = new Schema({
 		index: true,
     required: true
 	},
-  comment: [{
+  comment: {
     body: String,
     editor: {type: Schema.Types.ObjectId, required: true, ref: 'Person'}
-  }],
+  },
   publisher: {type: Schema.Types.ObjectId, required: true, ref: 'Person'},
 	description: String
 });

@@ -5,8 +5,6 @@ var Schema = mongoose.Schema;
 var validate = require('jsonschema').validate;
 var assert = require('assert');
 
-var models = require('../models');
-
 describe('schema.jsonSchema', function() {
 
   it ('should corretly translate all supported types', function () {
@@ -333,7 +331,7 @@ describe('schema.jsonSchema', function() {
   it ('should correctly translate number value constaints', function () {
 
     var mSchema = new Schema({
-      value: {type: Number, min: -5, max: 50, required: true}
+      value: {type: Number, min: -5, max: 50, default: 0, required: true}
     }, {id: false, _id: false});
 
     var jsonSchema = mSchema.jsonSchema('Sample');
@@ -345,7 +343,8 @@ describe('schema.jsonSchema', function() {
         value: {
           type: 'number',
           minimun: -5,
-          maximum: 50
+          maximum: 50,
+          default: 0
         }
       },
       required: ['value']
@@ -393,38 +392,5 @@ describe('schema.jsonSchema', function() {
     });
 
   });
-
-});
-
-describe('model.jsonSchema', function() {
-
-  it ('should process flat schema and -- validate correct entity', function () {
-    var jsonSchema = models.Person.jsonSchema();
-
-    var validPerson = {
-      firstName: 'John',
-      lastName: 'Smith',
-      email: 'john.smith@mail.net'
-    };
-    var aPerson = new models.Person(validPerson);
-    assert.ok(!aPerson.validateSync());
-    assert.equal(validate(validPerson, jsonSchema).errors.length, 0);
-
-  });
-
-  it ('should process flat schema and -- mark invalid entity', function () {
-    var jsonSchema = models.Person.jsonSchema();
-
-    var invalidPerson = {
-      firstName: 'John',
-      lastName: 'Smith',
-      email: 12
-    };
-    var aPerson = new models.Person(invalidPerson);
-    assert.ok(aPerson.validateSync());
-    assert.equal(validate(invalidPerson, jsonSchema).errors.length, 1);
-
-  });
-
 
 });
