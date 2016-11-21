@@ -7,6 +7,176 @@ var assert = require('assert');
 
 describe('schema.jsonSchema', function() {
 
+  it ('should correctly translate all simmple types', function () {
+    var mSchema = new Schema({
+      n: Number,
+      s: String,
+      d: Date,
+      b: Boolean,
+      u: Schema.Types.ObjectId
+    });
+
+    var jsonSchema = mSchema.jsonSchema('Sample');
+
+    assert.deepEqual(jsonSchema, {
+      title: 'Sample',
+      type: 'object',
+      properties: {
+        n: { type: 'number' },
+        s: { type: 'string' },
+        d: { type: 'string', format: 'date-time' },
+        b: { type: 'boolean' },
+        u: { type: 'string', format: 'uuid', pattern: '[0-9a-fA-F]{24}' },
+        _id: { type: 'string', format: 'uuid', pattern: '[0-9a-fA-F]{24}' }
+      }
+    });
+
+  });
+
+  it ('should correctly translate all simmple types in arrays', function () {
+    var mSchema = new Schema({
+      n: [Number],
+      s: [String],
+      d: [Date],
+      b: [Boolean],
+      u: [Schema.Types.ObjectId]
+    });
+
+    var jsonSchema = mSchema.jsonSchema('Sample');
+
+    assert.deepEqual(jsonSchema, {
+      title: 'Sample',
+      type: 'object',
+      properties: {
+        n: {
+          type: 'array',
+          items: {type: 'number'}
+        },
+        s: {
+          type: 'array',
+          items: {type: 'string'}
+        },
+        d: {
+          type: 'array',
+          items: {type: 'string', format: 'date-time'}
+        },
+        b: {
+          type: 'array',
+          items: {type: 'boolean'}
+        },
+        u: {
+          type: 'array',
+          items: {type: 'string', format: 'uuid', pattern: '[0-9a-fA-F]{24}'}
+        },
+        _id: {
+          type: 'string', format: 'uuid', pattern: '[0-9a-fA-F]{24}'
+        }
+      }
+    });
+
+  });
+
+  it ('should correctly translate all simmple types when required', function () {
+    var mSchema = new Schema({
+      n: {type: Number, required: true},
+      s: {type: String, required: true},
+      d: {type: Date, required: true},
+      b: {type: Boolean, required: true},
+      u: {type: Schema.Types.ObjectId, required: true}
+    });
+
+    var jsonSchema = mSchema.jsonSchema('Sample');
+
+    assert.deepEqual(jsonSchema, {
+      title: 'Sample',
+      type: 'object',
+      properties: {
+        n: { type: 'number' },
+        s: { type: 'string' },
+        d: { type: 'string', format: 'date-time' },
+        b: { type: 'boolean' },
+        u: { type: 'string', format: 'uuid', pattern: '[0-9a-fA-F]{24}' },
+        _id: { type: 'string', format: 'uuid', pattern: '[0-9a-fA-F]{24}' }
+      },
+      required: ['n', 's', 'd', 'b', 'u']
+    });
+
+  });
+
+  it ('should correctly translate all simmple types in embedded doc', function () {
+
+    var mSchema = new Schema({
+      embededDoc: {
+        n: Number,
+        s: String,
+        d: Date,
+        b: Boolean,
+        u: Schema.Types.ObjectId
+      }
+    });
+
+    var jsonSchema = mSchema.jsonSchema('Sample');
+
+    assert.deepEqual(jsonSchema, {
+      title: 'Sample',
+      type: 'object',
+      properties: {
+        embededDoc: {
+          title: 'embededDoc',
+          type: 'object',
+          properties: {
+            n: { type: 'number' },
+            s: { type: 'string' },
+            d: { type: 'string', format: 'date-time' },
+            b: { type: 'boolean' },
+            u: { type: 'string', format: 'uuid', pattern: '[0-9a-fA-F]{24}' }
+          }
+        },
+        _id: { type: 'string', format: 'uuid', pattern: '[0-9a-fA-F]{24}' }
+      }
+    });
+
+  });
+
+  it ('should correctly translate all simmple types in required embedded doc', function () {
+
+    var mSchema = new Schema({
+      embededDoc: {
+        type: {
+          n: Number,
+          s: String,
+          d: Date,
+          b: Boolean,
+          u: Schema.Types.ObjectId
+        },
+        required: true
+      }
+    });
+
+    var jsonSchema = mSchema.jsonSchema('Sample');
+
+    assert.deepEqual(jsonSchema, {
+      title: 'Sample',
+      type: 'object',
+      properties: {
+        embededDoc: {
+          title: 'embededDoc',
+          type: 'object',
+          properties: {
+            n: { type: 'number' },
+            s: { type: 'string' },
+            d: { type: 'string', format: 'date-time' },
+            b: { type: 'boolean' },
+            u: { type: 'string', format: 'uuid', pattern: '[0-9a-fA-F]{24}' }
+          }
+        },
+        _id: { type: 'string', format: 'uuid', pattern: '[0-9a-fA-F]{24}' }
+      },
+      required: ['embededDoc']
+    });
+
+  });
+
   it ('should corretly translate all supported types', function () {
 
     var mSchema = new Schema({
@@ -119,7 +289,8 @@ describe('schema.jsonSchema', function() {
             type: 'object',
             properties: {
               s: { type: 'string' },
-              n: { type: 'number' }
+              n: { type: 'number' },
+              _id: { type: 'string', format: 'uuid', pattern: '[0-9a-fA-F]{24}' }
             }
           }
         },
@@ -157,8 +328,7 @@ describe('schema.jsonSchema', function() {
           type: 'string',
           description: 'Described field'
         },
-        _id: { type: 'string', format: 'uuid', pattern: '[0-9a-fA-F]{24}' },
-        id: {}
+        _id: { type: 'string', format: 'uuid', pattern: '[0-9a-fA-F]{24}' }
       },
       required: [
         'rn', 'rs', 'rd', 'rb', 'ru', 'rr', 'rNestedDoc', 'rar', 'described'
@@ -230,8 +400,7 @@ describe('schema.jsonSchema', function() {
             }
           }
         },
-        _id: {type: 'string', format: 'uuid', pattern: '[0-9a-fA-F]{24}'},
-        id: {}
+        _id: {type: 'string', format: 'uuid', pattern: '[0-9a-fA-F]{24}'}
       },
       required: ['t', 'rND', 'rAND']
     })
@@ -320,8 +489,7 @@ describe('schema.jsonSchema', function() {
           },
           required: ['y']
         },
-        _id: {type: 'string', format: 'uuid', pattern: '[0-9a-fA-F]{24}'},
-        id: {},
+        _id: {type: 'string', format: 'uuid', pattern: '[0-9a-fA-F]{24}'}
       },
       required: ['xyz']
     });

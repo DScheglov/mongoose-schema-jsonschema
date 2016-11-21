@@ -98,7 +98,9 @@ describe('Field selection: model.jsonSchema()', function() {
 
   it('should build schema excluding pointed fields (string)', function() {
 
-    var jsonSchema = models.Book.jsonSchema('-author -comment -publisher -description -__v');
+    var jsonSchema = models.Book.jsonSchema(
+      '-author -comment -official -publisher -description -__v'
+    );
     assert.deepEqual(jsonSchema, {
       title: 'Book',
       type: 'object',
@@ -113,7 +115,9 @@ describe('Field selection: model.jsonSchema()', function() {
 
   it('should build schema excluding pointed fields (array)', function() {
 
-    var jsonSchema = models.Book.jsonSchema(['-author', '-comment', '-publisher', '-description', '-__v']);
+    var jsonSchema = models.Book.jsonSchema([
+      '-author', '-comment', '-official', '-publisher', '-description', '-__v'
+    ]);
     assert.deepEqual(jsonSchema, {
       title: 'Book',
       type: 'object',
@@ -131,6 +135,7 @@ describe('Field selection: model.jsonSchema()', function() {
     var jsonSchema = models.Book.jsonSchema({
       author: false,
       comment: false,
+      official: false,
       publisher: false,
       description: false,
       __v: false
@@ -149,7 +154,54 @@ describe('Field selection: model.jsonSchema()', function() {
 
   it('should build schema for fields of nested objects (string)', function() {
 
+    var jsonSchema = models.Book.jsonSchema('title official.slogan');
+
+    assert.deepEqual(jsonSchema, {
+      title: 'Book',
+      type: 'object',
+      properties: {
+        title: { type: 'string' },
+        official: {
+          title: 'official',
+          type: 'object',
+          properties: {
+            slogan: { type: 'string' }
+          }
+        },
+        _id: { type: 'string', format: 'uuid', pattern: '[0-9a-fA-F]{24}' }
+      }
+    });
+
+  });
+
+  it('should build schema for fields of nested array (string)', function() {
+
     var jsonSchema = models.Book.jsonSchema('title comment.body');
+    assert.deepEqual(jsonSchema, {
+      title: 'Book',
+      type: 'object',
+      properties: {
+        title: { type: 'string' },
+        comment: {
+          type: 'array',
+          items: {
+            title: 'itemOf_comment',
+            type: 'object',
+            properties: {
+              body: { type: 'string' }
+            }
+          }
+        },
+        _id: { type: 'string', format: 'uuid', pattern: '[0-9a-fA-F]{24}' }
+      }
+    });
+
+  });
+
+
+  it('should build schema for fields of nested array explicitly included by array name (string)', function() {
+
+    var jsonSchema = models.Book.jsonSchema('title comment');
 
     assert.deepEqual(jsonSchema, {
       title: 'Book',
@@ -157,10 +209,21 @@ describe('Field selection: model.jsonSchema()', function() {
       properties: {
         title: { type: 'string' },
         comment: {
-          title: 'comment',
-          type: 'object',
-          properties: {
-            body: { type: 'string' }
+          type: 'array',
+          items: {
+            title: 'itemOf_comment',
+            type: 'object',
+            properties: {
+              body: { type: 'string' },
+              editor: {
+                type: 'string',
+                format: 'uuid',
+                pattern: '[0-9a-fA-F]{24}',
+                'x-ref': 'Person',
+                description: 'Refers to Person'
+              },
+              _id: { type: 'string', format: 'uuid', pattern: '[0-9a-fA-F]{24}' }
+            }
           }
         },
         _id: { type: 'string', format: 'uuid', pattern: '[0-9a-fA-F]{24}' }
