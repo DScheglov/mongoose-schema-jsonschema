@@ -1,24 +1,26 @@
 'use strict';
 
-var lib = require('./lib');
-var translators = require('./lib/schema');
+var schema_jsonSchema = require('./lib/schema');
+var model_jsonSchema = require('./lib/model');
+var types = require('./lib/types');
 
 module.exports = exports = function(mongoose) {
   mongoose = mongoose || require('mongoose');
   var Types = mongoose.Schema.Types;
 
-  mongoose.SchemaType.prototype.jsonSchema = translators.simpleType_jsonSchema;
+  mongoose.SchemaType.prototype.jsonSchema = types.simpleType_jsonSchema;
 
-  Types.Date.prototype.jsonSchema = translators.date_jsonSchema;
-  Types.ObjectId.prototype.jsonSchema = translators.objectId_jsonSchema;
+  Types.Date.prototype.jsonSchema = types.date_jsonSchema;
+  Types.ObjectId.prototype.jsonSchema = types.objectId_jsonSchema;
 
   Types.Array.prototype.jsonSchema =
-  Types.DocumentArray.prototype.jsonSchema = translators.array_jsonSchema;
+  Types.DocumentArray.prototype.jsonSchema = types.array_jsonSchema;
 
-  Types.Embedded.prototype.jsonSchema = 
-  Types.Mixed.prototype.jsonSchema = translators.mixed_jsonSchema;
+  Types.Embedded.prototype.jsonSchema =
+  Types.Mixed.prototype.jsonSchema = types.mixed_jsonSchema;
 
-  mongoose.Schema.prototype.jsonSchema = lib.schema_jsonSchema;
-  mongoose.Model.jsonSchema = lib.model_jsonSchema;
+  mongoose.Schema.prototype.jsonSchema = schema_jsonSchema;
+  mongoose.Model.jsonSchema = model_jsonSchema;
+
   return mongoose;
 }

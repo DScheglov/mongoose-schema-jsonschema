@@ -17,7 +17,7 @@ describe('Field selection: model.jsonSchema()', function() {
       properties: {
         title: { type: 'string' },
         year: { type: 'number' },
-        _id: { type: 'string', format: 'uuid', pattern: '[0-9a-fA-F]{24}' }
+        _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' }
       }
     });
 
@@ -32,7 +32,7 @@ describe('Field selection: model.jsonSchema()', function() {
       properties: {
         title: { type: 'string' },
         year: { type: 'number' },
-        _id: { type: 'string', format: 'uuid', pattern: '[0-9a-fA-F]{24}' }
+        _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' }
       }
     });
 
@@ -47,7 +47,7 @@ describe('Field selection: model.jsonSchema()', function() {
       properties: {
         title: { type: 'string' },
         year: { type: 'number' },
-        _id: { type: 'string', format: 'uuid', pattern: '[0-9a-fA-F]{24}' }
+        _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' }
       }
     });
 
@@ -107,7 +107,7 @@ describe('Field selection: model.jsonSchema()', function() {
       properties: {
         title: { type: 'string' },
         year: { type: 'number' },
-        _id: { type: 'string', format: 'uuid', pattern: '[0-9a-fA-F]{24}' }
+        _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' }
       }
     });
 
@@ -124,7 +124,7 @@ describe('Field selection: model.jsonSchema()', function() {
       properties: {
         title: { type: 'string' },
         year: { type: 'number' },
-        _id: { type: 'string', format: 'uuid', pattern: '[0-9a-fA-F]{24}' }
+        _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' }
       }
     });
 
@@ -146,7 +146,7 @@ describe('Field selection: model.jsonSchema()', function() {
       properties: {
         title: { type: 'string' },
         year: { type: 'number' },
-        _id: { type: 'string', format: 'uuid', pattern: '[0-9a-fA-F]{24}' }
+        _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' }
       }
     });
 
@@ -168,7 +168,7 @@ describe('Field selection: model.jsonSchema()', function() {
             slogan: { type: 'string' }
           }
         },
-        _id: { type: 'string', format: 'uuid', pattern: '[0-9a-fA-F]{24}' }
+        _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' }
       }
     });
 
@@ -192,7 +192,7 @@ describe('Field selection: model.jsonSchema()', function() {
             }
           }
         },
-        _id: { type: 'string', format: 'uuid', pattern: '[0-9a-fA-F]{24}' }
+        _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' }
       }
     });
 
@@ -218,15 +218,92 @@ describe('Field selection: model.jsonSchema()', function() {
               editor: {
                 type: 'string',
                 format: 'uuid',
-                pattern: '[0-9a-fA-F]{24}',
+                pattern: '^[0-9a-fA-F]{24}$',
                 'x-ref': 'Person',
                 description: 'Refers to Person'
               },
-              _id: { type: 'string', format: 'uuid', pattern: '[0-9a-fA-F]{24}' }
+              _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' }
             }
           }
         },
-        _id: { type: 'string', format: 'uuid', pattern: '[0-9a-fA-F]{24}' }
+        _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' }
+      }
+    });
+
+  });
+
+  it('should build schema for fields of nested array explicitly included by array name (string) and excluding some nested field', function() {
+
+    var jsonSchema = models.Book.jsonSchema('title comment -comment._id');
+
+    assert.deepEqual(jsonSchema, {
+      title: 'Book',
+      type: 'object',
+      properties: {
+        title: { type: 'string' },
+        comment: {
+          type: 'array',
+          items: {
+            title: 'itemOf_comment',
+            type: 'object',
+            properties: {
+              body: { type: 'string' },
+              editor: {
+                type: 'string',
+                format: 'uuid',
+                pattern: '^[0-9a-fA-F]{24}$',
+                'x-ref': 'Person',
+                description: 'Refers to Person'
+              }
+            }
+          }
+        },
+        _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' }
+      }
+    });
+
+  });
+
+  it('should correctly process fields deselected on schema-level', function() {
+
+    var mSchema = new mongoose.Schema({
+      x: Number,
+      y: {type: Number, required: true, select: false}
+    });
+
+    var aModel = mongoose.model('aModel', mSchema);
+
+    var jsonSchema = aModel.jsonSchema('x y');
+
+    assert.deepEqual(jsonSchema, {
+      title: 'aModel',
+      type: 'object',
+      properties: {
+        x: {type: 'number'},
+        _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' }
+      }
+    })
+
+  });
+
+  it('should correctly process overriding of deselection on schema-level', function() {
+
+    var mSchema = new mongoose.Schema({
+      x: Number,
+      y: {type: Number, required: true, select: false}
+    });
+
+    var zModel = mongoose.model('zModel', mSchema);
+
+    var jsonSchema = zModel.jsonSchema('x +y');
+
+    assert.deepEqual(jsonSchema, {
+      title: 'zModel',
+      type: 'object',
+      properties: {
+        x: {type: 'number'},
+        y: {type: 'number'},
+        _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' }
       }
     });
 
