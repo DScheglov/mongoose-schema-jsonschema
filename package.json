@@ -1,6 +1,6 @@
 {
   "name": "mongoose-schema-jsonschema",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "mongoose.Schema extention with mehtod jsonShema",
   "main": "index.js",
   "scripts": {
@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/DScheglov/mongoose-schema-jsonschema#readme",
   "devDependencies": {
+    "istanbul": "^0.4.5",
     "jsonschema": "^1.1.0",
     "mocha": "^3.1.0",
     "mongoose": "^4.6.1"
