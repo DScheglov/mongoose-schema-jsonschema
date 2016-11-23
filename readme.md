@@ -70,8 +70,8 @@ const PersonSchema = new Schema({
 const Book = mongoose.model('Book', BookSchema);
 const Person = mongoose.model('Person', PersonSchema)
 
-console.dir(Book.jsonSchema('title year'));
-console.dir(Book.jsonSchema('', 'author'));
+console.dir(Book.jsonSchema('title year'), {depth: null});
+console.dir(Book.jsonSchema('', 'author'), {depth: null});
 
 ```
 
@@ -95,8 +95,14 @@ Output:
     author: {
       title: 'Person',
       type: 'object',
-      properties: [Object],
-      required: [Object],
+      properties: {
+        firstName: { type: 'string' },
+        lastName: { type: 'string' },
+        dateOfBirth: { type: 'string', format: 'date-time' },
+        _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' },
+        __v: { type: 'number' }
+      },
+      required: [ 'firstName', 'lastName' ],
       'x-ref': 'Person',
       description: 'Refers to Person'
     },

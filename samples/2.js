@@ -18,5 +18,5 @@ const PersonSchema = new Schema({
 const Book = mongoose.model('Book', BookSchema);
 const Person = mongoose.model('Person', PersonSchema)
 
-console.dir(Book.jsonSchema('title year'));
-console.dir(Book.jsonSchema('', 'author'));
+console.dir(Book.jsonSchema('title year'), {depth: null});
+console.dir(Book.jsonSchema('', 'author'), {depth: null});
