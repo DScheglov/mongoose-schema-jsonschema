@@ -33,6 +33,64 @@ describe('schema.jsonSchema', function() {
 
   });
 
+  it ('should correctly translate all simmple types and virtuals', function () {
+    var mSchema = new Schema({
+      n: Number,
+      s: String,
+      d: Date,
+      b: Boolean,
+      u: Schema.Types.ObjectId
+    }, {
+      toJSON: { virtuals: true }
+    });
+
+    var jsonSchema = mSchema.jsonSchema('Sample');
+
+    assert.deepEqual(jsonSchema, {
+      title: 'Sample',
+      type: 'object',
+      properties: {
+        n: { type: 'number' },
+        s: { type: 'string' },
+        d: { type: 'string', format: 'date-time' },
+        b: { type: 'boolean' },
+        u: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' },
+        _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' },
+        id: {}
+      }
+    });
+
+  });
+
+  it ('should correctly translate all simmple types and virtuals (through getters options)', function () {
+    var mSchema = new Schema({
+      n: Number,
+      s: String,
+      d: Date,
+      b: Boolean,
+      u: Schema.Types.ObjectId
+    }, {
+      toJSON: { getters: true }
+    });
+
+    var jsonSchema = mSchema.jsonSchema('Sample');
+
+    assert.deepEqual(jsonSchema, {
+      title: 'Sample',
+      type: 'object',
+      properties: {
+        n: { type: 'number' },
+        s: { type: 'string' },
+        d: { type: 'string', format: 'date-time' },
+        b: { type: 'boolean' },
+        u: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' },
+        _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' },
+        id: {}
+      }
+    });
+
+  });
+
   it ('should correctly translate all simmple types in arrays', function () {
     var mSchema = new Schema({
       n: [Number],

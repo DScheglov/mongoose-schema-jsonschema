@@ -13,12 +13,8 @@ var PersonSchema = new Schema({
 
 PersonSchema.virtual("fullName").set(function (v) {
 	var parts = v.split(/\s/);
-	if (parts.length) {
-		this.firtsName = parts[0];
-		if (parts.length > 1) {
-			this.lastName = parts[1];
-		} else lastName = "";
-	}
+	this.firtsName = parts.shift() || '';
+	this.lastName = parts.join(' ') || '';
 	return this.get("fullName");
 }).get(function () {
 	return this.firstName + " " + this.lastName;

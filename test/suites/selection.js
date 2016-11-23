@@ -95,7 +95,6 @@ describe('Field selection: model.jsonSchema()', function() {
 
   });
 
-
   it('should build schema excluding pointed fields (string)', function() {
 
     var jsonSchema = models.Book.jsonSchema(
@@ -304,6 +303,53 @@ describe('Field selection: model.jsonSchema()', function() {
         x: {type: 'number'},
         y: {type: 'number'},
         _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' }
+      }
+    });
+
+  });
+
+  it('should correctly process id field selection (virtuals)', function() {
+
+    var mSchema = new mongoose.Schema({
+      x: Number
+    }, {
+      toJSON: {virtuals: true}
+    });
+
+    var zModel = mongoose.model('z1Model', mSchema);
+
+    var jsonSchema = zModel.jsonSchema('x +y -_id id');
+
+    assert.deepEqual(jsonSchema, {
+      title: 'z1Model',
+      type: 'object',
+      properties: {
+        x: {type: 'number'},
+        id: { }
+      }
+    });
+
+  });
+
+  it('should correctly process id field selection (getters)', function() {
+
+    var mSchema = new mongoose.Schema({
+      x: Number
+    }, {
+      toJSON: {getters: true}
+    });
+
+    var zModel = mongoose.model('z2Model', mSchema);
+
+    var jsonSchema = zModel.jsonSchema('x +y id');
+
+    assert.deepEqual(jsonSchema, {
+      title: 'z2Model',
+      type: 'object',
+      properties: {
+        x: {type: 'number'},
+        _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' },
+        id: { }
       }
     });
 

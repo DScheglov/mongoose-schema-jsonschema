@@ -194,6 +194,53 @@ describe('Validation: schema.jsonSchema()', function() {
 
   });
 
+  it ('should build schema and validate strings with regExp', function () {
+
+    var mSchema = new mongoose.Schema({
+      s: {type: String, match: 'Hello world!'}
+    });
+
+    var jsonSchema = mSchema.jsonSchema();
+
+    assert.deepEqual(jsonSchema, {
+      type: 'object',
+      properties: {
+        s: {
+          type: 'string',
+          pattern: 'Hello world!'
+        },
+        _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$'}
+      }
+    });
+
+    var errors;
+    errors = validate({s: 'Hello world!'}, jsonSchema).errors;
+    assert.equal(errors.length, 0);
+
+    errors = validate({s: '(abc|bac|cab)'}, jsonSchema).errors;
+    assert.equal(errors.length, 1);
+
+    errors = validate({s: 'abc'}, jsonSchema).errors;
+    assert.equal(errors.length, 1);
+
+    errors = validate({s: 'ABC'}, jsonSchema).errors;
+    assert.equal(errors.length, 1);
+
+    errors = validate({s: 'cba'}, jsonSchema).errors;
+    assert.equal(errors.length, 1);
+
+    errors = validate({s: ''}, jsonSchema).errors;
+    assert.equal(errors.length, 1);
+
+    errors = validate({s: 12}, jsonSchema).errors;
+    assert.equal(errors.length, 1);
+
+
+    errors = validate({_id: '564e0da0105badc887ef1d3e'}, jsonSchema).errors;
+    assert.equal(errors.length, 0)
+
+  });
+
   it ('should build schema and validate arrays with minItems constraint', function() {
 
     var mSchema = mongoose.Schema({
