@@ -1,7 +1,7 @@
 # mongoose-schema-jsonschema
 
 The module allows to create json schema from Mongoose schema by adding
-`jsonShema` method to `mongoose.Schema` and `mongoose.Model` classes
+`jsonSchema` method to `mongoose.Schema` and `mongoose.Model` classes
 
 ## Installation
 ```shell
