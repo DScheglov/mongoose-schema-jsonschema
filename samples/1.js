@@ -11,6 +11,6 @@ const BookSchema = new Schema({
   author: {type: String, required: true}
 });
 
-let jsonShema = BookSchema.jsonSchema();
+let jsonSchema = BookSchema.jsonSchema();
 
-console.dir(jsonShema, {depth: null});
+console.dir(jsonSchema, {depth: null});
