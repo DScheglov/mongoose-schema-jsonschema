@@ -3,7 +3,7 @@
 The module allows to create json schema from Mongoose schema by adding
 `jsonSchema` method to `mongoose.Schema` and `mongoose.Model` classes
 
-#### [Installation](#Installation) | [Samples](#Samples) | [Specifications](#Specifications) | [Command line](#Command-line)
+#### [Installation](#installation) | [Samples](#samples) | [Specifications](#specifications) | [Command line](#command-line)
 
 
 ## Installation
