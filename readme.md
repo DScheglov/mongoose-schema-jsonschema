@@ -3,12 +3,15 @@
 The module allows to create json schema from Mongoose schema by adding
 `jsonSchema` method to `mongoose.Schema` and `mongoose.Model` classes
 
+#### [Installation](#Installation) | [Samples](#Samples) | [Specifications](#Specifications) | [Command line](#Command-line)
+
+
 ## Installation
 ```shell
 npm install mongoose-schema-jsonschema
 ```
 
-## Sample
+## Samples
 
 Let's build json schema from simple mongoose schema
 ```javascript
@@ -146,3 +149,33 @@ function model_jsonSchema(fields, populate) { ... }
  - **fields**: `String`|`Array`|`Object` - mongoose selection object
  - **populate**: `String`|`Object` - mongoose population options
  - *Returns* `Object` - json schema
+
+
+## Command line
+
+There is a command line utility to build schema without importing `mongoose-schema-jsonschema`
+to your project
+
+```shell
+npm i -g jsonschema-builder
+```
+
+### Usage
+
+Getting options:
+```shell
+jsonschema-builder --help
+```
+
+Output:
+```shell
+  Usage: jsonschema-builder [options] <pathToModels>
+
+  Options:
+
+    -h, --help     output usage information
+    -V, --version  output the version number
+    -j, --json     JSON format for output
+```
+Samples and other details can be reached by the link:
+(jsonschema-builder)[https://www.npmjs.com/package/jsonschema-builder]
