@@ -5,6 +5,7 @@ The module allows to create json schema from Mongoose schema by adding
 
 #### [Installation](#installation) | [Samples](#samples) | [Specifications](#specifications) | [Command line](#command-line)
 
+-----------------
 
 ## Installation
 ```shell
@@ -178,4 +179,4 @@ Output:
     -j, --json     JSON format for output
 ```
 Samples and other details can be reached by the link:
-(jsonschema-builder)[https://www.npmjs.com/package/jsonschema-builder]
+[jsonschema-builder](https://www.npmjs.com/package/jsonschema-builder)
