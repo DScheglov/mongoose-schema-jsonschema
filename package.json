@@ -1,6 +1,6 @@
 {
   "name": "mongoose-schema-jsonschema",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "mongoose.Schema extention with mehtod jsonShema",
   "main": "index.js",
   "scripts": {
