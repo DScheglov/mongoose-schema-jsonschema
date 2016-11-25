@@ -170,13 +170,14 @@ jsonschema-builder --help
 
 Output:
 ```shell
-  Usage: jsonschema-builder [options] <pathToModels>
+  Usage: index [options] <pathToModels>
 
   Options:
 
     -h, --help     output usage information
     -V, --version  output the version number
     -j, --json     JSON format for output
+    -n, --noid     Removes id field from resulting schema
 ```
 Samples and other details can be reached by the link:
 [jsonschema-builder](https://www.npmjs.com/package/jsonschema-builder)

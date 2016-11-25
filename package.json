@@ -1,7 +1,7 @@
 {
   "name": "mongoose-schema-jsonschema",
-  "version": "1.0.10",
-  "description": "mongoose.Schema extention with mehtod jsonShema",
+  "version": "1.0.11",
+  "description": "Mongoose extention that allows to build json schema for mongoose models and schemas",
   "main": "index.js",
   "scripts": {
     "test": "NODE_ENV=test istanbul cover _mocha -- -R spec"
@@ -14,7 +14,11 @@
     "jsonschema",
     "json",
     "schema",
-    "mongoose"
+    "mongoose",
+    "model",
+    "json schema",
+    "build",
+    "create"
   ],
   "author": "Dmitry Scheglov <Dmitry.Scheglov@gmail.com>",
   "license": "MIT",
