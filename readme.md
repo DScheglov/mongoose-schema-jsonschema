@@ -170,7 +170,7 @@ jsonschema-builder --help
 
 Output:
 ```shell
-  Usage: index [options] <pathToModels>
+  Usage: jsonschema-builder [options] <pathToModels>
 
   Options:
 
