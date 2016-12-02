@@ -1,7 +1,7 @@
 {
   "name": "mongoose-schema-jsonschema",
-  "version": "1.0.12",
-  "description": "Mongoose extention that allows to build json schema for mongoose models and schemas",
+  "version": "1.1.1",
+  "description": "Mongoose extention that allows to build json schema for mongoose models, schemas and queries",
   "main": "index.js",
   "scripts": {
     "test": "NODE_ENV=test istanbul cover _mocha -- -R spec"
@@ -16,6 +16,7 @@
     "schema",
     "mongoose",
     "model",
+    "query",
     "json schema",
     "build",
     "create"

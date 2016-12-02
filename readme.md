@@ -1,9 +1,15 @@
 # mongoose-schema-jsonschema
 
 The module allows to create json schema from Mongoose schema by adding
-`jsonSchema` method to `mongoose.Schema` and `mongoose.Model` classes
+`jsonSchema` method to `mongoose.Schema`, `mongoose.Model` and `mongoose.Query`
+classes
 
-#### [Installation](#installation) | [Samples](#samples) | [Specifications](#specifications) | [Command line](#command-line)
+## Contents
+ - [Installation](#installation)
+ - [Samples](#samples)
+ - [Specifications](#specifications)
+ - [Custom Schema Types Support](#custom-schema-types-support)
+ - [Command line](#command-line)
 
 -----------------
 
@@ -117,9 +123,46 @@ Output:
 }
 ```
 
+```javascript
+'use strict';
+
+const extendMongooose = require('mongoose-schema-jsonschema');
+const mongoose = extendMongooose(require('mongoose'));
+
+const Schema = mongoose.Schema;
+
+const BookSchema = new Schema({
+  title: {type: String, required: true},
+  year: Number,
+  author: {type: Schema.Types.ObjectId, required: true, ref: 'Person'}
+});
+
+const Book = mongoose.model('Book', BookSchema);
+const Q = Book.find().select('title').limit(5);
+
+
+console.dir(Q.jsonSchema(), {depth: null});
+```
+
+Output:
+```javascript
+{
+  title: 'List of books',
+  type: 'array',
+  items: {
+    type: 'object',
+    properties: {
+      title: { type: 'string' },
+      _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' }
+    }
+  },
+  maxItems: 5
+}
+```
+
 ## Specifications
 
-### mongoose.Schema.prototpye.jsonSchema
+### mongoose.Schema.prototype.jsonSchema
 Builds the json schema based on the Mongooose schema.
 if schema has been already built the method returns new deep copy
 
@@ -139,7 +182,7 @@ Parameters:
 ### mongoose.Model.jsonSchema
 Builds json schema for model considering the selection and population
 
-if `fields` specified the method removes `required` contraints
+if `fields` specified the method removes `required` constraints
 
 Declaration:
 ```javascript
@@ -150,6 +193,63 @@ function model_jsonSchema(fields, populate) { ... }
  - **fields**: `String`|`Array`|`Object` - mongoose selection object
  - **populate**: `String`|`Object` - mongoose population options
  - *Returns* `Object` - json schema
+
+
+ ### mongoose.Query.prototype.jsonSchema
+ Builds json schema considering the query type and query options.
+ The method returns the schema for array if query type is `find` and
+ the schema for single document if query type is `findOne` or `findOneAnd*`.
+
+ In case when the method returns schema for array the collection name is used to
+ form title of the resulting schema. In `findOne*` case the title is the name
+ of the appropriate model.
+
+ Declaration:
+ ```javascript
+ function query_jsonSchema() { ... }
+ ```
+
+  Parameters:
+  - *Returns* `Object` - json schema
+
+
+## Custom Schema Types Support
+
+If you use custom Schema Types you should define the jsonSchema method
+for your type-class(es).
+
+The base functionality is accessible from your code by calling base-class methods:
+
+```javascript
+newSchemaType.prototype.jsonSchema = function() {
+  // Simple types (strings, numbers, bools):
+  var jsonSchema = mongoose.SchemaType.prototype.jsonSchema.call(this);
+
+  // Date:
+  var jsonSchema = Types.Date.prototype.jsonSchema.call(this);
+
+  // ObjectId
+  var jsonSchema = Types.ObjectId.prototype.jsonSchema.call(this);
+
+  // for Array (or DocumentArray)
+  var jsonSchema = Types.Array.prototype.jsonSchema.call(this);
+
+  // for Embedded documents
+  var jsonSchema = Types.Embedded.prototype.jsonSchema.call(this);
+
+  // for Mixed documents:
+  var jsonSchema = Types.Mixed.prototype.jsonSchema.call(this);
+
+  /*
+   *
+   * Place your code instead of this comment
+   *
+   */
+
+   return jsonSchema;
+}
+```
+
 
 
 ## Command line

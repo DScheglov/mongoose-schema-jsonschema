@@ -2,6 +2,7 @@
 
 var schema_jsonSchema = require('./lib/schema');
 var model_jsonSchema = require('./lib/model');
+var query_jsonSchema = require('./lib/query');
 var types = require('./lib/types');
 
 module.exports = exports = function(mongoose) {
@@ -21,6 +22,7 @@ module.exports = exports = function(mongoose) {
 
   mongoose.Schema.prototype.jsonSchema = schema_jsonSchema;
   mongoose.Model.jsonSchema = model_jsonSchema;
+  mongoose.Query.prototype.jsonSchema = query_jsonSchema;
 
   return mongoose;
 }
