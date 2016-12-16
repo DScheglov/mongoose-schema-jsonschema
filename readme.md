@@ -1,3 +1,5 @@
+[![Build status](https://travis-ci.org/DScheglov/mongoose-schema-jsonschema.svg?branch=master)](https://travis-ci.org/DScheglov/mongoose-schema-jsonschema)
+
 # mongoose-schema-jsonschema
 
 The module allows to create json schema from Mongoose schema by adding
