@@ -4,8 +4,8 @@
   "description": "Mongoose extention that allows to build json schema for mongoose models, schemas and queries",
   "main": "index.js",
   "scripts": {
-    "test-loc": "NODE_ENV=test istanbul cover _mocha -- -R spec",
-    "test": "./test.sh"
+    "test": "NODE_ENV=test istanbul cover _mocha -- -R spec",
+    "test-loc": "./test.sh"
   },
   "repository": {
     "type": "git",
