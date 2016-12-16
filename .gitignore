@@ -2,3 +2,4 @@
 /locals/
 /coverage/
 /out/
+coveralls.sh

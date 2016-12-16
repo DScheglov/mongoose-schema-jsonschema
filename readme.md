@@ -1,4 +1,5 @@
 [![Build status](https://travis-ci.org/DScheglov/mongoose-schema-jsonschema.svg?branch=master)](https://travis-ci.org/DScheglov/mongoose-schema-jsonschema)
+[![Coverage Status](https://coveralls.io/repos/github/DScheglov/mongoose-schema-jsonschema/badge.svg?branch=master)](https://coveralls.io/github/DScheglov/mongoose-schema-jsonschema?branch=master)
 
 # mongoose-schema-jsonschema
 
