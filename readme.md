@@ -10,7 +10,7 @@ classes
 ## Contents
  - [Installation](#installation)
  - [Samples](#samples)
- - [Validation tools](#validation)
+ - [Validation tools](#validation-tools)
  - [Specifications](#specifications)
  - [Custom Schema Types Support](#custom-schema-types-support)
  - [Command line](#command-line)
