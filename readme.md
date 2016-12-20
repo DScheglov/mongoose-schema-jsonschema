@@ -10,6 +10,7 @@ classes
 ## Contents
  - [Installation](#installation)
  - [Samples](#samples)
+ - [Validation tools](#validation)
  - [Specifications](#specifications)
  - [Custom Schema Types Support](#custom-schema-types-support)
  - [Command line](#command-line)
@@ -162,6 +163,12 @@ Output:
   maxItems: 5
 }
 ```
+
+## Validation tools
+Created by **mongoose-schema-jsonschema** json-schema's could be used for
+document validation with:
+ - [`ajv`](https://www.npmjs.com/package/ajv)
+ - [`jsonschema`](https://www.npmjs.com/package/jsonschema)
 
 ## Specifications
 
