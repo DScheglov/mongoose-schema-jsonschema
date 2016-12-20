@@ -17,7 +17,7 @@ describe('Field selection: model.jsonSchema()', function() {
       properties: {
         title: { type: 'string' },
         year: { type: 'number' },
-        _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' }
+        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' }
       }
     });
 
@@ -32,7 +32,7 @@ describe('Field selection: model.jsonSchema()', function() {
       properties: {
         title: { type: 'string' },
         year: { type: 'number' },
-        _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' }
+        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' }
       }
     });
 
@@ -47,7 +47,7 @@ describe('Field selection: model.jsonSchema()', function() {
       properties: {
         title: { type: 'string' },
         year: { type: 'number' },
-        _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' }
+        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' }
       }
     });
 
@@ -106,7 +106,7 @@ describe('Field selection: model.jsonSchema()', function() {
       properties: {
         title: { type: 'string' },
         year: { type: 'number' },
-        _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' }
+        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' }
       }
     });
 
@@ -123,7 +123,7 @@ describe('Field selection: model.jsonSchema()', function() {
       properties: {
         title: { type: 'string' },
         year: { type: 'number' },
-        _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' }
+        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' }
       }
     });
 
@@ -145,7 +145,7 @@ describe('Field selection: model.jsonSchema()', function() {
       properties: {
         title: { type: 'string' },
         year: { type: 'number' },
-        _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' }
+        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' }
       }
     });
 
@@ -167,7 +167,7 @@ describe('Field selection: model.jsonSchema()', function() {
             slogan: { type: 'string' }
           }
         },
-        _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' }
+        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' }
       }
     });
 
@@ -191,7 +191,7 @@ describe('Field selection: model.jsonSchema()', function() {
             }
           }
         },
-        _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' }
+        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' }
       }
     });
 
@@ -216,16 +216,15 @@ describe('Field selection: model.jsonSchema()', function() {
               body: { type: 'string' },
               editor: {
                 type: 'string',
-                format: 'uuid',
                 pattern: '^[0-9a-fA-F]{24}$',
                 'x-ref': 'Person',
                 description: 'Refers to Person'
               },
-              _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' }
+              _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' }
             }
           }
         },
-        _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' }
+        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' }
       }
     });
 
@@ -249,7 +248,6 @@ describe('Field selection: model.jsonSchema()', function() {
               body: { type: 'string' },
               editor: {
                 type: 'string',
-                format: 'uuid',
                 pattern: '^[0-9a-fA-F]{24}$',
                 'x-ref': 'Person',
                 description: 'Refers to Person'
@@ -257,7 +255,7 @@ describe('Field selection: model.jsonSchema()', function() {
             }
           }
         },
-        _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' }
+        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' }
       }
     });
 
@@ -279,7 +277,7 @@ describe('Field selection: model.jsonSchema()', function() {
       type: 'object',
       properties: {
         x: {type: 'number'},
-        _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' }
+        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' }
       }
     })
 
@@ -302,7 +300,7 @@ describe('Field selection: model.jsonSchema()', function() {
       properties: {
         x: {type: 'number'},
         y: {type: 'number'},
-        _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' }
+        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' }
       }
     });
 
@@ -348,7 +346,7 @@ describe('Field selection: model.jsonSchema()', function() {
       type: 'object',
       properties: {
         x: {type: 'number'},
-        _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' },
+        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' },
         id: { }
       }
     });

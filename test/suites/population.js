@@ -22,13 +22,13 @@ describe('Population: Model.jsonSchema()', function () {
             lastName: {type: 'string'},
             email: {type: 'string'},
             isPoet: {type: 'boolean', default: false},
-            _id: {type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$'},
+            _id: {type: 'string', pattern: '^[0-9a-fA-F]{24}$'},
             __v: {type: 'number'}
           },
           'x-ref': 'Person',
           description: 'Refers to Person'
         },
-        _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$'}
+        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$'}
       }
     });
   });
@@ -53,7 +53,7 @@ describe('Population: Model.jsonSchema()', function () {
           'x-ref': 'Person',
           description: 'Refers to Person'
         },
-        _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$'}
+        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$'}
       }
     });
   });
@@ -75,7 +75,7 @@ describe('Population: Model.jsonSchema()', function () {
               lastName: {type: 'string'},
               email: {type: 'string'},
               isPoet: {type: 'boolean', default: false},
-              _id: {type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$'},
+              _id: {type: 'string', pattern: '^[0-9a-fA-F]{24}$'},
               __v: {type: 'number'}
             },
             'x-ref': 'Person',
@@ -83,7 +83,7 @@ describe('Population: Model.jsonSchema()', function () {
           },
           minItems: 1
         },
-        _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$'}
+        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$'}
       }
     });
   });
@@ -107,14 +107,14 @@ describe('Population: Model.jsonSchema()', function () {
             properties: {
               firstName: {type: 'string'},
               isPoet: {type: 'boolean', default: false},
-              _id: {type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$'}
+              _id: {type: 'string', pattern: '^[0-9a-fA-F]{24}$'}
             },
             'x-ref': 'Person',
             description: 'Refers to Person'
           },
           minItems: 1
         },
-        _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$'}
+        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$'}
       }
     });
   });
@@ -126,7 +126,7 @@ describe('Population: Model.jsonSchema()', function () {
       type: 'object',
       properties: {
         title: {type: 'string'},
-        _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$'}
+        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$'}
       }
     });
   });
@@ -154,13 +154,13 @@ describe('Population: Model.jsonSchema()', function () {
                   lastName: { type: 'string' },
                   email: { type: 'string' },
                   isPoet: {type: 'boolean', default: false },
-                  _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' },
+                  _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' },
                   __v: { type: 'number' }
                 },
                 'x-ref': 'Person',
                 description: 'Refers to Person'
               },
-              _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' }
+              _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' }
             }
           }
         },
@@ -174,7 +174,7 @@ describe('Population: Model.jsonSchema()', function () {
               lastName: {type: 'string'},
               email: {type: 'string'},
               isPoet: {type: 'boolean', default: false},
-              _id: {type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$'},
+              _id: {type: 'string', pattern: '^[0-9a-fA-F]{24}$'},
               __v: {type: 'number'}
             },
             'x-ref': 'Person',
@@ -182,7 +182,7 @@ describe('Population: Model.jsonSchema()', function () {
           },
           minItems: 1
         },
-        _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$'}
+        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$'}
       }
     });
 

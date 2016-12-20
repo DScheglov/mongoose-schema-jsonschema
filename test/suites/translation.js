@@ -26,8 +26,8 @@ describe('schema.jsonSchema', function() {
         s: { type: 'string' },
         d: { type: 'string', format: 'date-time' },
         b: { type: 'boolean' },
-        u: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' },
-        _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' }
+        u: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' },
+        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' }
       }
     });
 
@@ -54,8 +54,8 @@ describe('schema.jsonSchema', function() {
         s: { type: 'string' },
         d: { type: 'string', format: 'date-time' },
         b: { type: 'boolean' },
-        u: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' },
-        _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' },
+        u: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' },
+        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' },
         id: {}
       }
     });
@@ -83,8 +83,8 @@ describe('schema.jsonSchema', function() {
         s: { type: 'string' },
         d: { type: 'string', format: 'date-time' },
         b: { type: 'boolean' },
-        u: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' },
-        _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' },
+        u: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' },
+        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' },
         id: {}
       }
     });
@@ -124,10 +124,10 @@ describe('schema.jsonSchema', function() {
         },
         u: {
           type: 'array',
-          items: {type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$'}
+          items: {type: 'string', pattern: '^[0-9a-fA-F]{24}$'}
         },
         _id: {
-          type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$'
+          type: 'string', pattern: '^[0-9a-fA-F]{24}$'
         }
       }
     });
@@ -153,8 +153,8 @@ describe('schema.jsonSchema', function() {
         s: { type: 'string' },
         d: { type: 'string', format: 'date-time' },
         b: { type: 'boolean' },
-        u: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' },
-        _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' }
+        u: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' },
+        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' }
       },
       required: ['n', 's', 'd', 'b', 'u']
     });
@@ -187,10 +187,10 @@ describe('schema.jsonSchema', function() {
             s: { type: 'string' },
             d: { type: 'string', format: 'date-time' },
             b: { type: 'boolean' },
-            u: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' }
+            u: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' }
           }
         },
-        _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' }
+        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' }
       }
     });
 
@@ -225,10 +225,10 @@ describe('schema.jsonSchema', function() {
             s: { type: 'string' },
             d: { type: 'string', format: 'date-time' },
             b: { type: 'boolean' },
-            u: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' }
+            u: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' }
           }
         },
-        _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' }
+        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' }
       },
       required: ['embededDoc']
     });
@@ -299,10 +299,9 @@ describe('schema.jsonSchema', function() {
         s: { type: 'string' },
         d: { type: 'string', format: 'date-time' },
         b: { type: 'boolean' },
-        u: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' },
+        u: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' },
         r: {
           type: 'string',
-          format: 'uuid',
           pattern: '^[0-9a-fA-F]{24}$',
           'x-ref': 'Book',
           'description': 'Refers to Book'
@@ -326,7 +325,6 @@ describe('schema.jsonSchema', function() {
           type: 'array',
           items: {
             type: 'string',
-            format: 'uuid',
             pattern: '^[0-9a-fA-F]{24}$'
           }
         },
@@ -334,7 +332,6 @@ describe('schema.jsonSchema', function() {
           type: 'array',
           items: {
             type: 'string',
-            format: 'uuid',
             pattern: '^[0-9a-fA-F]{24}$',
             'x-ref': 'Book',
             description: 'Refers to Book'
@@ -348,7 +345,7 @@ describe('schema.jsonSchema', function() {
             properties: {
               s: { type: 'string' },
               n: { type: 'number' },
-              _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' }
+              _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' }
             }
           }
         },
@@ -356,10 +353,9 @@ describe('schema.jsonSchema', function() {
         rs: { type: 'string' },
         rd: { type: 'string', format: 'date-time' },
         rb: { type: 'boolean' },
-        ru: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' },
+        ru: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' },
         rr: {
           type: 'string',
-          format: 'uuid',
           pattern: '^[0-9a-fA-F]{24}$',
           'x-ref': 'Book',
           description: 'Refers to Book'
@@ -376,7 +372,6 @@ describe('schema.jsonSchema', function() {
           type: 'array',
           items: {
             type: 'string',
-            format: 'uuid',
             pattern: '^[0-9a-fA-F]{24}$',
             'x-ref': 'Book',
             description: 'Refers to Book'
@@ -386,7 +381,7 @@ describe('schema.jsonSchema', function() {
           type: 'string',
           description: 'Described field'
         },
-        _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' }
+        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' }
       },
       required: [
         'rn', 'rs', 'rd', 'rb', 'ru', 'rr', 'rNestedDoc', 'rar', 'described'
@@ -458,7 +453,7 @@ describe('schema.jsonSchema', function() {
             }
           }
         },
-        _id: {type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$'}
+        _id: {type: 'string', pattern: '^[0-9a-fA-F]{24}$'}
       },
       required: ['t', 'rND', 'rAND']
     })
@@ -547,7 +542,7 @@ describe('schema.jsonSchema', function() {
           },
           required: ['y']
         },
-        _id: {type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$'}
+        _id: {type: 'string', pattern: '^[0-9a-fA-F]{24}$'}
       },
       required: ['xyz']
     });

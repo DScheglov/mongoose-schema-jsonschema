@@ -51,7 +51,7 @@ Output:
     title: { type: 'string' },
     year: { type: 'number' },
     author: { type: 'string' },
-    _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' }
+    _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' }
   },
   required: [ 'title', 'author' ]
 }
@@ -96,7 +96,7 @@ Output:
   properties: {
     title: { type: 'string' },
     year: { type: 'number' },
-    _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' }
+    _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' }
   }
 }
 {
@@ -112,14 +112,14 @@ Output:
         firstName: { type: 'string' },
         lastName: { type: 'string' },
         dateOfBirth: { type: 'string', format: 'date-time' },
-        _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' },
+        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' },
         __v: { type: 'number' }
       },
       required: [ 'firstName', 'lastName' ],
       'x-ref': 'Person',
       description: 'Refers to Person'
     },
-    _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' },
+    _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' },
     __v: { type: 'number' }
   },
   required: [ 'title', 'author' ]
@@ -156,7 +156,7 @@ Output:
     type: 'object',
     properties: {
       title: { type: 'string' },
-      _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' }
+      _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' }
     }
   },
   maxItems: 5

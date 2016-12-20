@@ -21,7 +21,7 @@ describe('Circular refs: Schema.jsonSchema()', function() {
       properties: {
         title: {type: 'string'},
         child: {$ref: '#schema-1'},
-        _id: {type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$'}
+        _id: {type: 'string', pattern: '^[0-9a-fA-F]{24}$'}
       }
     })
 

@@ -25,7 +25,7 @@ describe('Queries: query.jsonSchema()', function() {
               type: 'string',
               'x-ref': 'Person',
               description: 'Refers to Person',
-              format: 'uuid',
+              
               pattern: '^[0-9a-fA-F]{24}$'
             },
             minItems: 1
@@ -41,10 +41,10 @@ describe('Queries: query.jsonSchema()', function() {
                   type: 'string',
                   'x-ref': 'Person',
                   description: 'Refers to Person',
-                  format: 'uuid',
+
                   pattern: '^[0-9a-fA-F]{24}$'
                 },
-                _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' }
+                _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' }
               },
               required: [ 'editor' ]
             }
@@ -61,11 +61,11 @@ describe('Queries: query.jsonSchema()', function() {
             type: 'string',
             'x-ref': 'Person',
             description: 'Refers to Person',
-            format: 'uuid',
+
             pattern: '^[0-9a-fA-F]{24}$'
           },
           description: { type: 'string' },
-          _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' },
+          _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' },
           __v: { type: 'number' }
         }
       }
@@ -90,12 +90,12 @@ describe('Queries: query.jsonSchema()', function() {
               type: 'string',
               'x-ref': 'Person',
               description: 'Refers to Person',
-              format: 'uuid',
+
               pattern: '^[0-9a-fA-F]{24}$'
             },
             minItems: 1
           },
-          _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' }
+          _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' }
         }
       }
     });
@@ -126,7 +126,7 @@ describe('Queries: query.jsonSchema()', function() {
                 lastName: { type: 'string' },
                 email: { type: 'string' },
                 isPoet: { type: 'boolean', default: false },
-                _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' },
+                _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' },
                 __v: { type: 'number' }
               },
               'x-ref': 'Person',
@@ -134,7 +134,7 @@ describe('Queries: query.jsonSchema()', function() {
             },
             minItems: 1
           },
-          _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' }
+          _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' }
         }
       }
     });
@@ -156,7 +156,7 @@ describe('Queries: query.jsonSchema()', function() {
         properties: {
           title: { type: 'string' },
           year: { type: 'number' },
-          _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' }
+          _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' }
         }
       },
       maxItems: 5
@@ -177,7 +177,7 @@ describe('Queries: query.jsonSchema()', function() {
       properties: {
         title: { type: 'string' },
         year: { type: 'number' },
-        _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$' }
+        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' }
       }
     });
 

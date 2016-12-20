@@ -24,7 +24,7 @@ describe('Validation: schema.jsonSchema()', function() {
           minimum: 0,
           maximum: 10
         },
-        _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$'}
+        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$'}
       }
     });
 
@@ -68,7 +68,7 @@ describe('Validation: schema.jsonSchema()', function() {
           minLength: 3,
           maxLength: 5
         },
-        _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$'}
+        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$'}
       }
     });
 
@@ -117,7 +117,7 @@ describe('Validation: schema.jsonSchema()', function() {
           type: 'string',
           enum: ['abc', 'bac', 'cab']
         },
-        _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$'}
+        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$'}
       }
     });
 
@@ -160,7 +160,7 @@ describe('Validation: schema.jsonSchema()', function() {
           type: 'string',
           pattern: '^(abc|bac|cab)$'
         },
-        _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$'}
+        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$'}
       }
     });
 
@@ -209,7 +209,7 @@ describe('Validation: schema.jsonSchema()', function() {
           type: 'string',
           pattern: 'Hello world!'
         },
-        _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$'}
+        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$'}
       }
     });
 
@@ -260,7 +260,7 @@ describe('Validation: schema.jsonSchema()', function() {
           items: { type: 'number' },
           minItems: 1
         },
-        _id: { type: 'string', format: 'uuid', pattern: '^[0-9a-fA-F]{24}$'}
+        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$'}
       }
     });
 
