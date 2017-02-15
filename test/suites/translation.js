@@ -473,7 +473,8 @@ describe('schema.jsonSchema', function() {
             required: true
           }],
           y: {type: mSchema2, required: true},
-          z: {type: [mSchema3]}
+          z: {type: [mSchema3]},
+          any: { type: Schema.Types.Mixed, required: true }
         },
         required: true
       }
@@ -538,9 +539,10 @@ describe('schema.jsonSchema', function() {
                   }
                 }
               }
-            }
+            },
+            any: { schema: { } }
           },
-          required: ['y']
+          required: ['y', 'any']
         },
         _id: {type: 'string', pattern: '^[0-9a-fA-F]{24}$'}
       },
@@ -610,6 +612,24 @@ describe('schema.jsonSchema', function() {
         }
       },
       required: ['valueFromList']
+    });
+
+  });
+
+  it ('should correctly translate Mixed type', function () {
+    var mSchema = new Schema({
+      m: Schema.Types.Mixed
+    });
+
+    var jsonSchema = mSchema.jsonSchema('Sample');
+
+    assert.deepEqual(jsonSchema, {
+      title: 'Sample',
+      type: 'object',
+      properties: {
+        m: { schema: {} },
+        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' }
+      }
     });
 
   });

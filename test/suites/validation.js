@@ -282,6 +282,96 @@ describe('Validation: schema.jsonSchema()', function() {
 
   });
 
+  it ('should build schema and validate numbers', function () {
+    var mSchema = new mongoose.Schema({
+      n: {type: Number, min: 0, max: 10}
+    });
+
+    var jsonSchema = mSchema.jsonSchema();
+
+    assert.deepEqual(jsonSchema, {
+      type: 'object',
+      properties: {
+        n: {
+          type: 'number',
+          minimum: 0,
+          maximum: 10
+        },
+        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$'}
+      }
+    });
+
+    var errors;
+    errors = validate({n: 3}, jsonSchema).errors;
+    assert.equal(errors.length, 0);
+
+    errors = validate({n: 0}, jsonSchema).errors;
+    assert.equal(errors.length, 0);
+
+    errors = validate({n: 10}, jsonSchema).errors;
+    assert.equal(errors.length, 0);
+
+    errors = validate({n: -1}, jsonSchema).errors;
+    assert.equal(errors.length, 1);
+
+    errors = validate({n: 13}, jsonSchema).errors;
+    assert.equal(errors.length, 1);
+
+    errors = validate({n: 'a'}, jsonSchema).errors;
+    assert.equal(errors.length, 1);
+
+    errors = validate({}, jsonSchema).errors;
+    assert.equal(errors.length, 0);
+
+  });
+
+  it ('should build schema and validate mixed', function () {
+
+    var mSchema = new mongoose.Schema({
+      m: { type: mongoose.Schema.Types.Mixed, required: true, default: {} }
+    });
+
+    var jsonSchema = mSchema.jsonSchema();
+
+    assert.deepEqual(jsonSchema, {
+      type: 'object',
+      properties: {
+        m: { schema: { } },
+        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$'}
+      },
+      required: ['m']
+    });
+
+    var errors;
+    errors = validate({m: 3}, jsonSchema).errors;
+    assert.equal(errors.length, 0);
+
+    errors = validate({m: null}, jsonSchema).errors;
+    assert.equal(errors.length, 0);
+
+    errors = validate({m: {} }, jsonSchema).errors;
+    assert.equal(errors.length, 0);
+
+    errors = validate({m: 'Hello world'}, jsonSchema).errors;
+    assert.equal(errors.length, 0);
+
+    errors = validate({m: ''}, jsonSchema).errors;
+    assert.equal(errors.length, 0);
+
+    errors = validate({m: true}, jsonSchema).errors;
+    assert.equal(errors.length, 0);
+
+    errors = validate({m: false}, jsonSchema).errors;
+    assert.equal(errors.length, 0);
+
+    errors = validate({ }, jsonSchema).errors;
+    assert.equal(errors.length, 1);
+
+    errors = validate({ s: '13234'}, jsonSchema).errors;
+    assert.equal(errors.length, 1);
+
+  });
+
 });
 
 describe('Validation: model.jsonSchema()', function() {
