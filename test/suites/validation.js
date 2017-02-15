@@ -336,7 +336,7 @@ describe('Validation: schema.jsonSchema()', function() {
     assert.deepEqual(jsonSchema, {
       type: 'object',
       properties: {
-        m: { schema: { } },
+        m: { },
         _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$'}
       },
       required: ['m']

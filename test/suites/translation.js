@@ -540,7 +540,7 @@ describe('schema.jsonSchema', function() {
                 }
               }
             },
-            any: { schema: { } }
+            any: { }
           },
           required: ['y', 'any']
         },
@@ -627,7 +627,7 @@ describe('schema.jsonSchema', function() {
       title: 'Sample',
       type: 'object',
       properties: {
-        m: { schema: {} },
+        m: { },
         _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' }
       }
     });
