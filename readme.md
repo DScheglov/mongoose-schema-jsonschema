@@ -291,3 +291,10 @@ Output:
 ```
 Samples and other details can be reached by the link:
 [jsonschema-builder](https://www.npmjs.com/package/jsonschema-builder)
+
+
+### Releases:
+ - version 1.0 - Basic functionality
+ - version 1.1 - Mongoose.Query support implemented
+ - version 1.1.5 - uuid issue fixed, ajv compliance verified
+ - version 1.1.7 - Schema.Types.Mixed issue fixed
