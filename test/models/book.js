@@ -4,8 +4,8 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var BookSchema = new Schema({
-	title: {type: String, required: true, index: true},
-	year: {type: Number, required: true, index: true},
+	title: { type: String, required: true, index: true },
+	year: { type: Number, required: true, index: true },
 	author: {
 		type: [{type: Schema.Types.ObjectId, required: true, ref: 'Person'}],
 		index: true,
@@ -19,7 +19,7 @@ var BookSchema = new Schema({
     slogan: String,
     announcement: String
   },
-  publisher: {type: Schema.Types.ObjectId, required: true, ref: 'Person'},
+  publisher: { type: Schema.Types.ObjectId, required: true, ref: 'Person' },
 	description: String
 });
 

@@ -298,3 +298,4 @@ Samples and other details can be reached by the link:
  - version 1.1 - Mongoose.Query support implemented
  - version 1.1.5 - uuid issue fixed, ajv compliance verified
  - version 1.1.8 - Schema.Types.Mixed issue fixed
+ - version 1.1.9 - readonly settings support added
