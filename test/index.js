@@ -10,3 +10,4 @@ require('./suites/uploading-mongoose-implicitly');
 require('./suites/circular-refs');
 require('./suites/queries');
 require('./suites/readonly');
+require('./suites/required-issue');
