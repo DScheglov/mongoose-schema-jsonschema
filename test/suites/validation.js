@@ -372,6 +372,112 @@ describe('Validation: schema.jsonSchema()', function() {
 
   });
 
+  it ('should build schema and validate mixed with description', function () {
+
+    var mSchema = new mongoose.Schema({
+      m: {
+        type: mongoose.Schema.Types.Mixed,
+        descr: 'some mixed content here',
+        required: true,
+        default: {} }
+    });
+
+    var jsonSchema = mSchema.jsonSchema();
+
+    assert.deepEqual(jsonSchema, {
+      type: 'object',
+      properties: {
+        m: {
+          description: 'some mixed content here'
+        },
+        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$'}
+      },
+      required: ['m']
+    });
+
+    var errors;
+    errors = validate({m: 3}, jsonSchema).errors;
+    assert.equal(errors.length, 0);
+
+    errors = validate({m: null}, jsonSchema).errors;
+    assert.equal(errors.length, 0);
+
+    errors = validate({m: {} }, jsonSchema).errors;
+    assert.equal(errors.length, 0);
+
+    errors = validate({m: 'Hello world'}, jsonSchema).errors;
+    assert.equal(errors.length, 0);
+
+    errors = validate({m: ''}, jsonSchema).errors;
+    assert.equal(errors.length, 0);
+
+    errors = validate({m: true}, jsonSchema).errors;
+    assert.equal(errors.length, 0);
+
+    errors = validate({m: false}, jsonSchema).errors;
+    assert.equal(errors.length, 0);
+
+    errors = validate({ }, jsonSchema).errors;
+    assert.equal(errors.length, 1);
+
+    errors = validate({ s: '13234'}, jsonSchema).errors;
+    assert.equal(errors.length, 1);
+
+  });
+
+  it ('should build schema and validate mixed with description and title', function () {
+
+    var mSchema = new mongoose.Schema({
+      m: {
+        title: 'MegaField',
+        type: mongoose.Schema.Types.Mixed,
+        descr: 'some mixed content here',
+        default: {} }
+    });
+
+    var jsonSchema = mSchema.jsonSchema();
+
+    assert.deepEqual(jsonSchema, {
+      type: 'object',
+      properties: {
+        m: {
+          title: 'MegaField',
+          description: 'some mixed content here'
+        },
+        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$'}
+      }
+    });
+
+    var errors;
+    errors = validate({m: 3}, jsonSchema).errors;
+    assert.equal(errors.length, 0);
+
+    errors = validate({m: null}, jsonSchema).errors;
+    assert.equal(errors.length, 0);
+
+    errors = validate({m: {} }, jsonSchema).errors;
+    assert.equal(errors.length, 0);
+
+    errors = validate({m: 'Hello world'}, jsonSchema).errors;
+    assert.equal(errors.length, 0);
+
+    errors = validate({m: ''}, jsonSchema).errors;
+    assert.equal(errors.length, 0);
+
+    errors = validate({m: true}, jsonSchema).errors;
+    assert.equal(errors.length, 0);
+
+    errors = validate({m: false}, jsonSchema).errors;
+    assert.equal(errors.length, 0);
+
+    errors = validate({ }, jsonSchema).errors;
+    assert.equal(errors.length, 0);
+
+    errors = validate({ s: '13234'}, jsonSchema).errors;
+    assert.equal(errors.length, 0);
+
+  });
+
 });
 
 describe('Validation: model.jsonSchema()', function() {
