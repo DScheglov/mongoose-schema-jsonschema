@@ -242,6 +242,86 @@ describe('Validation: schema.jsonSchema()', function() {
 
   });
 
+  it ('should build schema and validate mixed with description', function () {
+    var mSchema = new mongoose.Schema({
+      m: {
+        type: mongoose.Schema.Types.Mixed,
+        required: true,
+        description: 'Some mixed content here',
+        default: {}
+      }
+    });
+
+    var jsonSchema = mSchema.jsonSchema();
+
+    assert.deepEqual(jsonSchema, {
+      type: 'object',
+      properties: {
+        m: {
+          description: 'Some mixed content here'
+        },
+        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$'}
+      },
+      required: ['m']
+    });
+
+    var ajv = new Ajv();
+    var isValid = (data) => ajv.validate(jsonSchema, data);
+
+    assert.ok(isValid({ m: 3 }));
+    assert.ok(isValid({ m: null }));
+    assert.ok(isValid({ m: { } }));
+    assert.ok(isValid({ m: 'Hello world' }));
+    assert.ok(isValid({ m: '' }));
+    assert.ok(isValid({ m: true }));
+    assert.ok(isValid({ m: false }));
+
+    assert.ok(!isValid({ }));
+    assert.ok(!isValid({ s: '13234' }));
+
+
+  });
+
+  it ('should build schema and validate mixed with description and title', function () {
+    var mSchema = new mongoose.Schema({
+      m: {
+        type: mongoose.Schema.Types.Mixed,
+        title: 'MegaField',
+        description: 'Some mixed content here',
+        default: {}
+      }
+    });
+
+    var jsonSchema = mSchema.jsonSchema();
+
+    assert.deepEqual(jsonSchema, {
+      type: 'object',
+      properties: {
+        m: {
+          title: 'MegaField',
+          description: 'Some mixed content here'
+        },
+        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$'}
+      }
+    });
+
+    var ajv = new Ajv();
+    var isValid = (data) => ajv.validate(jsonSchema, data);
+
+    assert.ok(isValid({ m: 3 }));
+    assert.ok(isValid({ m: null }));
+    assert.ok(isValid({ m: { } }));
+    assert.ok(isValid({ m: 'Hello world' }));
+    assert.ok(isValid({ m: '' }));
+    assert.ok(isValid({ m: true }));
+    assert.ok(isValid({ m: false }));
+
+    assert.ok(isValid({ }));
+    assert.ok(isValid({ s: '13234' }));
+
+
+  });
+
 });
 
 describe('Validation: model.jsonSchema()', function() {

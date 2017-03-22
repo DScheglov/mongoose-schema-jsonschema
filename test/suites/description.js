@@ -58,4 +58,31 @@ describe('Description: Schema.jsonSchema()', function() {
 
   });
 
+
+  it('should add title when it is specified', function () {
+
+    var mSchema = new mongoose.Schema({
+      s: {
+        title: 'S',
+        type: mongoose.Schema.Types.Mixed,
+        required: true,
+        descr: 'mixed content'
+      }
+    }, { _id: null });
+
+    var jsonSchema = mSchema.jsonSchema();
+
+    assert.deepEqual(jsonSchema, {
+      type: 'object',
+      properties: {
+        s: {
+          description: 'mixed content',
+          title: 'S'
+        }
+      },
+      required: [ 's' ]
+    });
+
+  });
+
 });
