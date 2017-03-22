@@ -299,4 +299,5 @@ Samples and other details can be reached by the link:
  - version 1.1.5 - uuid issue fixed, ajv compliance verified
  - version 1.1.8 - Schema.Types.Mixed issue fixed
  - version 1.1.9 - readonly settings support added
- - version 1.1.11 - required issue fixed [See on GitHub](https://github.com/DScheglov/mongoose-schema-jsonschema/issues/2)
+ - version 1.1.11 - required issue fixed [issue#2](https://github.com/DScheglov/mongoose-schema-jsonschema/issues/2)
+ - version 1.1.12 - mixed-type fields description and title support added (fix for issue: [issue#3](https://github.com/DScheglov/mongoose-schema-jsonschema/issues/3))
