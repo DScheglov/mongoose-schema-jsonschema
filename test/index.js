@@ -11,3 +11,4 @@ require('./suites/circular-refs');
 require('./suites/queries');
 require('./suites/readonly');
 require('./suites/required-issue');
+require('./suites/discriminators');

@@ -12,7 +12,7 @@ describe('Queries: query.jsonSchema()', function() {
     var jsonSchema = models.Book.find().jsonSchema();
 
     assert.deepEqual(jsonSchema, {
-      title: 'List of books',
+      title: 'List of Books',
       type: 'array',
       items: {
         type: 'object',
@@ -78,7 +78,7 @@ describe('Queries: query.jsonSchema()', function() {
     var jsonSchema = models.Book.find({}, 'title author').jsonSchema();
 
     assert.deepEqual(jsonSchema, {
-      title: 'List of books',
+      title: 'List of Books',
       type: 'array',
       items: {
         type: 'object',
@@ -110,7 +110,7 @@ describe('Queries: query.jsonSchema()', function() {
       .jsonSchema();
 
     assert.deepEqual(jsonSchema, {
-      title: 'List of books',
+      title: 'List of Books',
       type: 'array',
       items: {
         type: 'object',
@@ -149,7 +149,7 @@ describe('Queries: query.jsonSchema()', function() {
       .jsonSchema();
 
     assert.deepEqual(jsonSchema, {
-      title: 'List of books',
+      title: 'List of Books',
       type: 'array',
       items: {
         type: 'object',

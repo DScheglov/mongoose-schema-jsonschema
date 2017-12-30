@@ -44,6 +44,14 @@ describe('schema.jsonSchema', function() {
       toJSON: { virtuals: true }
     });
 
+    mSchema.virtual('id').get(function () {
+      return this._id
+    });
+
+    mSchema.virtual('summary').get(function () {
+      return this.s + this.n
+    });
+
     var jsonSchema = mSchema.jsonSchema('Sample');
 
     assert.deepEqual(jsonSchema, {
@@ -56,7 +64,8 @@ describe('schema.jsonSchema', function() {
         b: { type: 'boolean' },
         u: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' },
         _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' },
-        id: {}
+        id: {},
+        summary: {}
       }
     });
 
@@ -73,6 +82,14 @@ describe('schema.jsonSchema', function() {
       toJSON: { getters: true }
     });
 
+    mSchema.virtual('id').get(function () {
+      return this._id
+    });
+
+    mSchema.virtual('summary').get(function () {
+      return this.s + this.n
+    });
+
     var jsonSchema = mSchema.jsonSchema('Sample');
 
     assert.deepEqual(jsonSchema, {
@@ -85,7 +102,8 @@ describe('schema.jsonSchema', function() {
         b: { type: 'boolean' },
         u: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' },
         _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' },
-        id: {}
+        id: {},
+        summary: {}
       }
     });
 
