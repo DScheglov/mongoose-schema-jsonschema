@@ -301,3 +301,8 @@ Samples and other details can be reached by the link:
  - version 1.1.9 - readonly settings support added
  - version 1.1.11 - required issue fixed [issue#2](https://github.com/DScheglov/mongoose-schema-jsonschema/issues/2)
  - version 1.1.12 - mixed-type fields description and title support added (fix for issue: [issue#3](https://github.com/DScheglov/mongoose-schema-jsonschema/issues/3))
+ - version 1.1.15 - support for mongoose@5.x ensured [issue#8](https://github.com/DScheglov/mongoose-schema-jsonschema/issues/8)
+
+### Supported versions:
+  - node.js: 4.x, 5.x, 6.x, 8.x, 9.x
+  - mongoose: 4.x, 5.x
