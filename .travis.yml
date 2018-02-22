@@ -3,7 +3,16 @@ node_js:
   - "4"
   - "5"
   - "6"
+  - "8"
+  - "9"
 
+env:
+  - MONGOOSE_VERSION=4
+  - MONGOOSE_VERSION=5
+
+install:
+  - npm install
+  - npm install mongoose@$MONGOOSE_VERSION
 
 notifications:
   webhooks: https://coveralls.io/webhook?repo_token=COVERALLS_REPO_TOKEN
