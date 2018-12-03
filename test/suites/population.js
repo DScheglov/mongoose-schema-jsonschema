@@ -191,7 +191,7 @@ describe('Population: Model.jsonSchema()', function () {
   it('should populate before paths excluded', function() {
     const jsonSchema = models.Book.jsonSchema(
       "-publisher._id -publisher.__v",
-      "publisher",
+      "publisher"
     );
 
     assert.deepEqual(jsonSchema, {
@@ -254,14 +254,14 @@ describe('Population: Model.jsonSchema()', function () {
   it('should not fail when populating not a field', function() {
     const jsonSchema = models.Book.jsonSchema(
       "",
-      "a_publisher",
+      "a_publisher"
     );
   });
 
   it('should not fail when populating a non-object field', function() {
     const jsonSchema = models.Book.jsonSchema(
       "",
-      "year",
+      "year"
     );
   });
 
