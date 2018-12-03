@@ -188,4 +188,86 @@ describe('Population: Model.jsonSchema()', function () {
 
   });
 
+  it('should populate before paths excluded', function() {
+    const jsonSchema = models.Book.jsonSchema(
+      "-publisher._id -publisher.__v",
+      "publisher",
+    );
+
+    assert.deepEqual(jsonSchema, {
+      title: 'Book',
+      type: 'object',
+      properties: {
+        title: { type: 'string' },
+        year: { type: 'number' },
+        author: {
+          type: 'array',
+          items: {
+            type: 'string',
+            'x-ref': 'Person',
+            description: 'Refers to Person',
+            pattern: '^[0-9a-fA-F]{24}$'
+          },
+          minItems: 1
+        },
+        comment: {
+          type: 'array',
+          items: {
+            title: 'itemOf_comment',
+            type: 'object',
+            properties: {
+              body: { type: 'string' },
+              editor: {
+                type: 'string',
+                'x-ref': 'Person',
+                description: 'Refers to Person',
+                pattern: '^[0-9a-fA-F]{24}$'
+              },
+              _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' }
+            }
+          }
+        },
+        official: {
+          title: 'official',
+          type: 'object',
+          properties: { slogan: { type: 'string' }, announcement: { type: 'string' } }
+        },
+        publisher: {
+          title: 'Person',
+          type: 'object',
+          properties: {
+            firstName: { type: 'string' },
+            lastName: { type: 'string' },
+            email: { type: 'string' },
+            isPoet: { type: 'boolean', default: false }
+          },
+          'x-ref': 'Person',
+          description: 'Refers to Person'
+        },
+        description: { type: 'string' },
+        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' },
+        __v: { type: 'number' }
+      }
+    });
+  });
+
+  it('should not fail when populating not a field', function() {
+    const jsonSchema = models.Book.jsonSchema(
+      "",
+      "a_publisher",
+    );
+  });
+
+  it('should not fail when populating a non-object field', function() {
+    const jsonSchema = models.Book.jsonSchema(
+      "",
+      "year",
+    );
+  });
+
+  it('should not fail when populating field with incorrect reference', function() {
+    const Ugly = require('../models/ugly');
+    const jsonSchema = Ugly.jsonSchema("", "publisher");
+  });
+
 });
