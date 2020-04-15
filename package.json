@@ -35,10 +35,10 @@
     "istanbul": "^0.4.5",
     "jsonschema": "^1.2.2",
     "mocha": "^5.2.0",
-    "mongoose": "^4.13.8 || ^5.0.0"
+    "mongoose": "^5.0.0"
   },
   "peerDependencies": {
-    "mongoose": ">= 4.8.5 <= 5.x"
+    "mongoose": "^5.0.0"
   },
   "dependencies": {
     "pluralize": "^7.0.0"

@@ -12,3 +12,4 @@ require('./suites/queries');
 require('./suites/readonly');
 require('./suites/required-issue');
 require('./suites/discriminators');
+require('./suites/nullable-types');

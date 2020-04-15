@@ -6,6 +6,7 @@ var query_jsonSchema = require('./lib/query');
 var types = require('./lib/types');
 
 module.exports = exports = function(mongoose) {
+  // eslint-disable-next-line global-require
   mongoose = mongoose || require('mongoose');
   var Types = mongoose.Schema.Types;
 

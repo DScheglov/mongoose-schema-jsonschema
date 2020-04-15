@@ -261,38 +261,6 @@ newSchemaType.prototype.jsonSchema = function() {
 ```
 
 
-
-## Command line
-
-There is a command line utility to build schema without importing `mongoose-schema-jsonschema`
-to your project
-
-```shell
-npm i -g jsonschema-builder
-```
-
-### Usage
-
-Getting options:
-```shell
-jsonschema-builder --help
-```
-
-Output:
-```shell
-  Usage: jsonschema-builder [options] <pathToModels>
-
-  Options:
-
-    -h, --help     output usage information
-    -V, --version  output the version number
-    -j, --json     JSON format for output
-    -n, --noid     Removes id field from resulting schema
-```
-Samples and other details can be reached by the link:
-[jsonschema-builder](https://www.npmjs.com/package/jsonschema-builder)
-
-
 ### Releases:
  - version 1.0 - Basic functionality
  - version 1.1 - Mongoose.Query support implemented
@@ -302,7 +270,8 @@ Samples and other details can be reached by the link:
  - version 1.1.11 - required issue fixed [issue#2](https://github.com/DScheglov/mongoose-schema-jsonschema/issues/2)
  - version 1.1.12 - mixed-type fields description and title support added (fix for issue: [issue#3](https://github.com/DScheglov/mongoose-schema-jsonschema/issues/3))
  - version 1.1.15 - support for mongoose@5.x ensured [issue#8](https://github.com/DScheglov/mongoose-schema-jsonschema/issues/8)
+ - version 1.2.0 - nullable types. Stopped support for node less then 8. Stopped support for mongoose v4.x
 
 ### Supported versions:
-  - node.js: 4.x, 5.x, 6.x, 8.x, 9.x
-  - mongoose: 4.x, 5.x
+  - node.js: 8.x, 9.x, 10.x, 12.x
+  - mongoose: 5.x

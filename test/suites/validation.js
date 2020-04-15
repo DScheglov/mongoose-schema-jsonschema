@@ -478,6 +478,44 @@ describe('Validation: schema.jsonSchema()', function() {
 
   });
 
+  it("should work with nullable types", () => {
+    var mSchema = new mongoose.Schema({
+      x: { type: Number, default: null },
+      y: { type: Number, default: 1 },
+    });
+
+    var jsonSchema = mSchema.jsonSchema();
+
+    assert.deepEqual(jsonSchema, {
+      type: 'object',
+      properties: {
+        x: { type: ['number', null], default: null },
+        y: { type: 'number', default: 1 },
+        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$'}
+      }
+    });
+
+    var errors;
+    errors = validate({ y: 3 }, jsonSchema).errors;
+    assert.equal(errors.length, 0);
+
+    errors = validate({ y: 3, x: null }, jsonSchema).errors;
+    assert.equal(errors.length, 0);
+
+    errors = validate({ y: 3, x: 2 }, jsonSchema).errors;
+    assert.equal(errors.length, 0);
+
+    errors = validate({ y: null }, jsonSchema).errors;
+    assert.equal(errors.length, 1);
+    console.log(errors);
+
+    errors = validate({ }, jsonSchema).errors;
+    assert.equal(errors.length, 0);
+
+    errors = validate({ x: null }, jsonSchema).errors;
+    assert.equal(errors.length, 0);
+  });
+
 });
 
 describe('Validation: model.jsonSchema()', function() {

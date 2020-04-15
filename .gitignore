@@ -1,6 +1,6 @@
-/node_modules/
-/locals/
-/coverage/
-/out/
+node_modules
+locals
+coverage
+out
 coveralls.sh
 .vscode
