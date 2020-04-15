@@ -1,26 +1,25 @@
-'use strict';
+const mongoose = require('mongoose');
 
-var mongoose = require("mongoose");
-var Schema = mongoose.Schema;
+const { Schema } = mongoose;
 
-var BookSchema = new Schema({
-	title: { type: String, required: true, index: true },
-	year: { type: Number, required: true, index: true },
-	author: {
-		type: [{type: Schema.Types.ObjectId, required: true, ref: 'Person'}],
-		index: true,
-    required: true
-	},
+const BookSchema = new Schema({
+  title: { type: String, required: true, index: true },
+  year: { type: Number, required: true, index: true },
+  author: {
+    type: [{ type: Schema.Types.ObjectId, required: true, ref: 'Person' }],
+    index: true,
+    required: true,
+  },
   comment: [{
     body: String,
-    editor: {type: Schema.Types.ObjectId, required: true, ref: 'Person'}
+    editor: { type: Schema.Types.ObjectId, required: true, ref: 'Person' },
   }],
   official: {
     slogan: String,
-    announcement: String
+    announcement: String,
   },
   publisher: { type: Schema.Types.ObjectId, required: true, ref: 'Person' },
-	description: String
+  description: String,
 });
 
-module.exports = exports = mongoose.model('Book', BookSchema);
+module.exports = mongoose.model('Book', BookSchema);

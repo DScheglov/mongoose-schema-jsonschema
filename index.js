@@ -1,24 +1,23 @@
-'use strict';
 
-var schema_jsonSchema = require('./lib/schema');
-var model_jsonSchema = require('./lib/model');
-var query_jsonSchema = require('./lib/query');
-var types = require('./lib/types');
+const schema_jsonSchema = require('./lib/schema');
+const model_jsonSchema = require('./lib/model');
+const query_jsonSchema = require('./lib/query');
+const types = require('./lib/types');
 
-module.exports = exports = function(mongoose) {
+module.exports = function moduleFactory(mongoose) {
   // eslint-disable-next-line global-require
   mongoose = mongoose || require('mongoose');
-  var Types = mongoose.Schema.Types;
+  const { Types } = mongoose.Schema;
 
   mongoose.SchemaType.prototype.jsonSchema = types.simpleType_jsonSchema;
 
   Types.Date.prototype.jsonSchema = types.date_jsonSchema;
   Types.ObjectId.prototype.jsonSchema = types.objectId_jsonSchema;
 
-  Types.Array.prototype.jsonSchema =
+  Types.Array.prototype.jsonSchema = types.array_jsonSchema;
   Types.DocumentArray.prototype.jsonSchema = types.array_jsonSchema;
 
-  Types.Embedded.prototype.jsonSchema =
+  Types.Embedded.prototype.jsonSchema = types.mixed_jsonSchema;
   Types.Mixed.prototype.jsonSchema = types.mixed_jsonSchema;
 
   mongoose.Schema.prototype.jsonSchema = schema_jsonSchema;
@@ -26,4 +25,4 @@ module.exports = exports = function(mongoose) {
   mongoose.Query.prototype.jsonSchema = query_jsonSchema;
 
   return mongoose;
-}
+};

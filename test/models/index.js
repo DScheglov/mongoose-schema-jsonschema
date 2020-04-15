@@ -1,6 +1,4 @@
-'use strict';
-
-module.exports = exports = {
+module.exports = {
   Person: require('./person'),
-  Book: require('./book')
+  Book: require('./book'),
 };

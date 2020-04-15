@@ -1,16 +1,16 @@
-'use strict';
+/* eslint-disable no-console */
 
 const mongoose = require('mongoose');
 require('../index')(mongoose);
 
-const Schema = mongoose.Schema;
+const { Schema } = mongoose;
 
 const BookSchema = new Schema({
-  title: {type: String, required: true},
+  title: { type: String, required: true },
   year: Number,
-  author: {type: String, required: true}
+  author: { type: String, required: true },
 });
 
-let jsonSchema = BookSchema.jsonSchema();
+const jsonSchema = BookSchema.jsonSchema();
 
-console.dir(jsonSchema, {depth: null});
+console.dir(jsonSchema, { depth: null });

@@ -1,13 +1,12 @@
-'use strict';
+const mongoose = require('mongoose');
 
-var mongoose = require("mongoose");
-var Schema = mongoose.Schema;
+const { Schema } = mongoose;
 
-var UglySchema = new Schema({
-	title: { type: String, required: true, index: true },
-	year: { type: Number, required: true, index: true },
+const UglySchema = new Schema({
+  title: { type: String, required: true, index: true },
+  year: { type: Number, required: true, index: true },
   publisher: { type: Schema.Types.ObjectId, required: true, ref: 'UnExistingModel' },
-	description: String
+  description: String,
 });
 
-module.exports = exports =  mongoose.model('Ugly', UglySchema);
+module.exports = mongoose.model('Ugly', UglySchema);
