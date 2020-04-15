@@ -26,25 +26,25 @@ npm install mongoose-schema-jsonschema
 
 Let's build json schema from simple mongoose schema
 ```javascript
-'use strict';
-
 const mongoose = require('mongoose');
 require('mongoose-schema-jsonschema')(mongoose);
 
 const Schema = mongoose.Schema;
 
 const BookSchema = new Schema({
-  title: {type: String, required: true},
+  title: { type: String, required: true },
   year: Number,
-  author: {type: String, required: true}
+  author: { type: String, required: true },
 });
 
-let jsonSchema = BookSchema.jsonSchema();
+const jsonSchema = BookSchema.jsonSchema();
 
-console.dir(jsonSchema, {depth: null});
+console.dir(jsonSchema, { depth: null });
 
 ```
-Output:
+
+**Output**:
+
 ```javascript
 {
   type: 'object',
@@ -53,7 +53,7 @@ Output:
     year: { type: 'number' },
     author: { type: 'string' },
     _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' }
-  },
+   },
   required: [ 'title', 'author' ]
 }
 ```
@@ -62,41 +62,40 @@ The mongoose.Model.jsonSchema method allows to build json schema considering
 the field selection and population
 
 ```javascript
-'use strict';
-
 const mongoose = require('mongoose');
 require('mongoose-schema-jsonschema')(mongoose);
 
 const Schema = mongoose.Schema;
 
 const BookSchema = new Schema({
-  title: {type: String, required: true},
+  title: { type: String, required: true },
   year: Number,
-  author: {type: Schema.Types.ObjectId, required: true, ref: 'Person'}
+  author: { type: Schema.Types.ObjectId, required: true, ref: 'Person' }
 });
 
 const PersonSchema = new Schema({
-  firstName: {type: String, required: true},
-  lastName: {type: String, required: true},
+  firstName: { type: String, required: true },
+  lastName: { type: String, required: true },
   dateOfBirth: Date
 });
 
 const Book = mongoose.model('Book', BookSchema);
 const Person = mongoose.model('Person', PersonSchema)
 
-console.dir(Book.jsonSchema('title year'), {depth: null});
-console.dir(Book.jsonSchema('', 'author'), {depth: null});
+console.dir(Book.jsonSchema('title year'), { depth: null });
+console.dir(Book.jsonSchema('', 'author'), { depth: null });
 
 ```
 
-Output:
+**Output**:
+
 ```javascript
 {
   title: 'Book',
   type: 'object',
   properties: {
-    title: { type: 'string' },
-    year: { type: 'number' },
+    title: { type: 'string'  },
+    year: { type: 'number'  },
     _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' }
   }
 }
@@ -104,51 +103,52 @@ Output:
   title: 'Book',
   type: 'object',
   properties: {
-    title: { type: 'string' },
-    year: { type: 'number' },
+    title: { type: 'string'  },
+    year: { type: 'number'  },
     author: {
       title: 'Person',
       type: 'object',
       properties: {
-        firstName: { type: 'string' },
-        lastName: { type: 'string' },
-        dateOfBirth: { type: 'string', format: 'date-time' },
-        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' },
+        firstName: { type: 'string'  },
+        lastName: { type: 'string'  },
+        dateOfBirth: { type: 'string', format: 'date-time'  },
+        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$'  },
         __v: { type: 'number' }
-      },
+       },
       required: [ 'firstName', 'lastName' ],
       'x-ref': 'Person',
       description: 'Refers to Person'
-    },
-    _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' },
+     },
+    _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$'  },
     __v: { type: 'number' }
-  },
+   },
   required: [ 'title', 'author' ]
 }
 ```
 
 ```javascript
-'use strict';
-
+const mongoose = require('mongoose');
 const extendMongooose = require('mongoose-schema-jsonschema');
-const mongoose = extendMongooose(require('mongoose'));
 
-const Schema = mongoose.Schema;
+extendMongooose(mongoose);
+
+const { Schema } = mongoose;
 
 const BookSchema = new Schema({
-  title: {type: String, required: true},
+  title: { type: String, required: true  },
   year: Number,
-  author: {type: Schema.Types.ObjectId, required: true, ref: 'Person'}
+  author: { type: Schema.Types.ObjectId, required: true, ref: 'Person' }
 });
 
 const Book = mongoose.model('Book', BookSchema);
 const Q = Book.find().select('title').limit(5);
 
 
-console.dir(Q.jsonSchema(), {depth: null});
+console.dir(Q.jsonSchema(), { depth: null });
 ```
 
-Output:
+**Output**:
+
 ```javascript
 {
   title: 'List of books',
@@ -156,10 +156,10 @@ Output:
   items: {
     type: 'object',
     properties: {
-      title: { type: 'string' },
+      title: { type: 'string'  },
       _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' }
     }
-  },
+   },
   maxItems: 5
 }
 ```
@@ -233,22 +233,22 @@ The base functionality is accessible from your code by calling base-class method
 ```javascript
 newSchemaType.prototype.jsonSchema = function() {
   // Simple types (strings, numbers, bools):
-  var jsonSchema = mongoose.SchemaType.prototype.jsonSchema.call(this);
+  const jsonSchema = mongoose.SchemaType.prototype.jsonSchema.call(this);
 
   // Date:
-  var jsonSchema = Types.Date.prototype.jsonSchema.call(this);
+  const jsonSchema = Types.Date.prototype.jsonSchema.call(this);
 
   // ObjectId
-  var jsonSchema = Types.ObjectId.prototype.jsonSchema.call(this);
+  const jsonSchema = Types.ObjectId.prototype.jsonSchema.call(this);
 
   // for Array (or DocumentArray)
-  var jsonSchema = Types.Array.prototype.jsonSchema.call(this);
+  const jsonSchema = Types.Array.prototype.jsonSchema.call(this);
 
   // for Embedded documents
-  var jsonSchema = Types.Embedded.prototype.jsonSchema.call(this);
+  const jsonSchema = Types.Embedded.prototype.jsonSchema.call(this);
 
   // for Mixed documents:
-  var jsonSchema = Types.Mixed.prototype.jsonSchema.call(this);
+  const jsonSchema = Types.Mixed.prototype.jsonSchema.call(this);
 
   /*
    *
@@ -260,7 +260,6 @@ newSchemaType.prototype.jsonSchema = function() {
 }
 ```
 
-
 ### Releases:
  - version 1.0 - Basic functionality
  - version 1.1 - Mongoose.Query support implemented
@@ -270,8 +269,17 @@ newSchemaType.prototype.jsonSchema = function() {
  - version 1.1.11 - required issue fixed [issue#2](https://github.com/DScheglov/mongoose-schema-jsonschema/issues/2)
  - version 1.1.12 - mixed-type fields description and title support added (fix for issue: [issue#3](https://github.com/DScheglov/mongoose-schema-jsonschema/issues/3))
  - version 1.1.15 - support for mongoose@5.x ensured [issue#8](https://github.com/DScheglov/mongoose-schema-jsonschema/issues/8)
- - version 1.2.0 - nullable types. Stopped support for node less then 8. Stopped support for mongoose v4.x
+ - version 1.3.0
+   - nullable types support (as union: `[type, 'null']`)
+   - `examples` option support [issue#14](https://github.com/DScheglov/mongoose-schema-jsonschema/issues/14) 
+   - support for fields dynamicly marked as `required` [issue#16](https://github.com/DScheglov/mongoose-schema-jsonschema/issues/16)
+   - Node support restricted to 8.x, 9.x, 10.x, 12.x
+   - Monggose support restricted to 5.x
+   - _Development_:
+     - migrated from `mocha` + `istanbul` to `jest`
+     - added `eslint`
 
+ 
 ### Supported versions:
   - node.js: 8.x, 9.x, 10.x, 12.x
   - mongoose: 5.x
