@@ -617,6 +617,45 @@ describe('schema.jsonSchema', () => {
     });
   });
 
+  it('should correctly translate string value constaints (minlength and maxlength)', () => {
+    const mSchema = new Schema({
+      valueFromList: {
+        type: String,
+        enum: ['red', 'green', 'yellow'],
+        required: true,
+      },
+      value20_30: {
+        type: String,
+        minlength: 20,
+        maxlength: 30,
+      },
+      value: { type: String, match: /^(?:H|h)ello, .+$/ },
+    }, { id: false, _id: false });
+
+    const jsonSchema = mSchema.jsonSchema('Sample');
+
+    assert.deepEqual(jsonSchema, {
+      title: 'Sample',
+      type: 'object',
+      properties: {
+        valueFromList: {
+          type: 'string',
+          enum: ['red', 'green', 'yellow'],
+        },
+        value20_30: {
+          type: 'string',
+          minLength: 20,
+          maxLength: 30,
+        },
+        value: {
+          type: 'string',
+          pattern: '^(?:H|h)ello, .+$',
+        },
+      },
+      required: ['valueFromList'],
+    });
+  });
+
   it('should correctly translate Mixed type', () => {
     const mSchema = new Schema({
       m: Schema.Types.Mixed,
