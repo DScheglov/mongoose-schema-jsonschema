@@ -278,6 +278,7 @@ newSchemaType.prototype.jsonSchema = function() {
    - _Development_:
      - migrated from `mocha` + `istanbul` to `jest`
      - added `eslint`
+ - version 1.3.1 - support `minlenght` and `maxlength` [issue#21] (https://github.com/DScheglov/mongoose-schema-jsonschema/issues/21)
 
  
 ### Supported versions:
