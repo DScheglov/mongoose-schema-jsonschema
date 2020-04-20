@@ -1,4 +1,3 @@
-
 const mongoose = require('../../index')(require('mongoose'));
 const Ajv = require('ajv');
 const assert = require('assert');

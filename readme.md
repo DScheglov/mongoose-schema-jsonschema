@@ -1,5 +1,8 @@
 [![Build status](https://travis-ci.org/DScheglov/mongoose-schema-jsonschema.svg?branch=master)](https://travis-ci.org/DScheglov/mongoose-schema-jsonschema)
-[![Coverage Status](https://coveralls.io/repos/github/DScheglov/mongoose-schema-jsonschema/badge.svg?branch=master)](https://coveralls.io/github/DScheglov/mongoose-schema-jsonschema?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/DScheglov/mongoose-schema-jsonschema/badge.svg?branch=master)](https://coveralls.io/github/DScheglov/)
+[![npm downloads](https://img.shields.io/npm/dm/mongoose-schema-jsonschema)](https://www.npmjs.com/package/mongoose-schema-jsonschema)
+[![David](https://img.shields.io/david/DScheglov/mongoose-schema-jsonschema)](https://www.npmjs.com/package/mongoose-schema-jsonschema)
+[![NPM](https://img.shields.io/npm/l/mongoose-schema-jsonschema)](https://github.com/DScheglov/mongoose-schema-jsonschema/blob/master/LICENSE)
 
 # mongoose-schema-jsonschema
 
@@ -9,11 +12,14 @@ classes
 
 ## Contents
  - [Installation](#installation)
+ - [Schema Build Configuration](#schema-build-configuration)
  - [Samples](#samples)
  - [Validation tools](#validation-tools)
  - [Specifications](#specifications)
  - [Custom Schema Types Support](#custom-schema-types-support)
- - [Command line](#command-line)
+ - [Releases](#releases)
+ - [Supported Versions](#supported-versions)
+ 
 
 -----------------
 
@@ -21,6 +27,80 @@ classes
 ```shell
 npm install mongoose-schema-jsonschema
 ```
+
+
+## Schema Build Configuration
+
+Since v1.4.0 it is able to configure how `jsonSchema()` works.
+
+To do that package was extended with `config` function.
+
+```js
+const config = require('mongoose-schema-jsonschema/config');
+
+config({
+  // ... options go here
+});
+```
+
+Currently there are two options that affects build process:
+
+- **forceRebuild**: `boolean` -- **mongoose-schema-jsonschema** caches json schemas built for mongoose schemas.
+  That means we cannot built updated jsonSchema after some updates were made in the mongoose schema
+  that already has jsonSchema.
+  To resolve this issue the `forceRebuild` was added (see sample bellow)
+
+- **fieldOptionsMapping**: `{ [key: string]: string } | Array<string|[string, string]>` - allows to specify how to convert some custom options specified in the mongoose field definition.
+
+```js
+const mongoose = require('mongoose-schema-jsonschema')();
+const config = require('mongoose-schema-jsonschema/config');
+
+const { Schema } = mongoose;
+
+const BookSchema = new Schema({
+  title: { type: String, required: true, notes: 'Book Title' },
+  year: Number,
+  author: { type: String, required: true },
+});
+
+const fieldOptionsMapping = {
+  notes: 'x-notes',
+};
+
+config({ fieldOptionsMapping });
+console.dir(BookSchema.jsonSchema(), { depth: null });
+
+config({ fieldOptionsMapping: [], forceRebuild: true }); // reseting
+console.dir(BookSchema.jsonSchema(), { depth: null });
+```
+
+**Output**:
+```js
+{
+  type: 'object',
+  properties: {
+    title: { type: 'string', 'x-notes': 'Book Title' },
+    year: { type: 'number' },
+    author: { type: 'string' },
+    _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' }
+  },
+  required: [ 'title', 'author' ]
+}
+{
+  type: 'object',
+  properties: {
+    title: { type: 'string', 'x-notes': 'Book Title' },
+    year: { type: 'number' },
+    author: { type: 'string' },
+    _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' }
+  },
+  required: [ 'title', 'author' ]
+}
+```
+
+
+
 
 ## Samples
 
@@ -260,7 +340,7 @@ newSchemaType.prototype.jsonSchema = function() {
 }
 ```
 
-### Releases:
+## Releases
  - version 1.0 - Basic functionality
  - version 1.1 - Mongoose.Query support implemented
  - version 1.1.5 - uuid issue fixed, ajv compliance verified
@@ -279,8 +359,9 @@ newSchemaType.prototype.jsonSchema = function() {
      - migrated from `mocha` + `istanbul` to `jest`
      - added `eslint`
  - version 1.3.1 - support `minlenght` and `maxlength` [issue#21] (https://github.com/DScheglov/mongoose-schema-jsonschema/issues/21)
+ - version 1.4.0 - schema build configurations (`forceRebuild` and `fieldOptionsMapping`)
 
  
-### Supported versions:
+## Supported versions
   - node.js: 8.x, 9.x, 10.x, 12.x
   - mongoose: 5.x

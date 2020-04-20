@@ -1,4 +1,3 @@
-
 const mongoose = require('../../index')(require('mongoose'));
 const { validate } = require('jsonschema');
 const assert = require('assert');
@@ -180,7 +179,7 @@ describe('Validation: schema.jsonSchema()', () => {
     assert.equal(errors.length, 0);
   });
 
-  it('should build schema and validate strings with regExp', () => {
+  it('should build schema and validate strings with regExp (Hello world)', () => {
     const mSchema = new mongoose.Schema({
       s: { type: String, match: 'Hello world!' },
     });
@@ -262,48 +261,6 @@ describe('Validation: schema.jsonSchema()', () => {
 
     errors = validate({ a: [0, 1, 'a'] }, jsonSchema).errors;
     assert.equal(errors.length, 1);
-  });
-
-  it('should build schema and validate numbers', () => {
-    const mSchema = new mongoose.Schema({
-      n: { type: Number, min: 0, max: 10 },
-    });
-
-    const jsonSchema = mSchema.jsonSchema();
-
-    assert.deepEqual(jsonSchema, {
-      type: 'object',
-      properties: {
-        n: {
-          type: 'number',
-          minimum: 0,
-          maximum: 10,
-        },
-        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' },
-      },
-    });
-
-    let errors;
-    errors = validate({ n: 3 }, jsonSchema).errors;
-    assert.equal(errors.length, 0);
-
-    errors = validate({ n: 0 }, jsonSchema).errors;
-    assert.equal(errors.length, 0);
-
-    errors = validate({ n: 10 }, jsonSchema).errors;
-    assert.equal(errors.length, 0);
-
-    errors = validate({ n: -1 }, jsonSchema).errors;
-    assert.equal(errors.length, 1);
-
-    errors = validate({ n: 13 }, jsonSchema).errors;
-    assert.equal(errors.length, 1);
-
-    errors = validate({ n: 'a' }, jsonSchema).errors;
-    assert.equal(errors.length, 1);
-
-    errors = validate({}, jsonSchema).errors;
-    assert.equal(errors.length, 0);
   });
 
   it('should build schema and validate mixed', () => {

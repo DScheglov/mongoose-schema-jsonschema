@@ -3,7 +3,7 @@ module.exports = {
         'commonjs': true,
         'es6': true,
         'node': true,
-        "jest/globals": true
+        'jest/globals': true
     },
     'extends': [
         'eslint:recommended',
@@ -43,7 +43,12 @@ module.exports = {
         'no-plusplus': 0,
         'no-restricted-syntax': 0,
         'no-continue': 0,
-        'arrow-parens': ["error", "as-needed"],
-        'no-mixed-operators': 0
+        'arrow-parens': ['error', 'as-needed'],
+        'no-mixed-operators': 0,
+        'jest/no-disabled-tests': 'warn',
+        'jest/no-focused-tests': 'error',
+        'jest/no-identical-title': 'error',
+        'jest/prefer-to-have-length': 'warn',
+        'jest/valid-expect': 'error'
     }
 };

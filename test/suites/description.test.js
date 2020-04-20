@@ -51,7 +51,7 @@ describe('Description: Schema.jsonSchema()', () => {
   });
 
 
-  it('should add title when it is specified', () => {
+  it('should add title and description when they are specified', () => {
     const mSchema = new mongoose.Schema({
       s: {
         title: 'S',
