@@ -90,7 +90,7 @@ console.dir(BookSchema.jsonSchema(), { depth: null });
 {
   type: 'object',
   properties: {
-    title: { type: 'string', 'x-notes': 'Book Title' },
+    title: { type: 'string' },
     year: { type: 'number' },
     author: { type: 'string' },
     _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' }
@@ -358,8 +358,9 @@ newSchemaType.prototype.jsonSchema = function() {
    - _Development_:
      - migrated from `mocha` + `istanbul` to `jest`
      - added `eslint`
- - version 1.3.1 - support `minlenght` and `maxlength` [issue#21] (https://github.com/DScheglov/mongoose-schema-jsonschema/issues/21)
- - version 1.4.0 - schema build configurations (`forceRebuild` and `fieldOptionsMapping`)
+ - version 1.3.1 - support `minlenght` and `maxlength` [issue#21](https://github.com/DScheglov/mongoose-schema-jsonschema/issues/21)
+ - version 1.4.0 - **broken** - schema build configurations (`forceRebuild` and `fieldOptionsMapping`)
+ - version 1.4.2 - fix for broken version 1.4.0 [issue#22](https://github.com/DScheglov/mongoose-schema-jsonschema/issues/22)
 
  
 ## Supported versions
