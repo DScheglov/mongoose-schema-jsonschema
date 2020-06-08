@@ -361,6 +361,7 @@ newSchemaType.prototype.jsonSchema = function() {
  - version 1.3.1 - support `minlenght` and `maxlength` [issue#21](https://github.com/DScheglov/mongoose-schema-jsonschema/issues/21)
  - version 1.4.0 - **broken** - schema build configurations (`forceRebuild` and `fieldOptionsMapping`)
  - version 1.4.2 - fix for broken version 1.4.0 [issue#22](https://github.com/DScheglov/mongoose-schema-jsonschema/issues/22)
+ - version 1.4.4 - fix for field constaints [issue#25](https://github.com/DScheglov/mongoose-schema-jsonschema/issues/25)
 
  
 ## Supported versions
