@@ -578,6 +578,61 @@ describe('schema.jsonSchema', () => {
     });
   });
 
+  it('should correctly translate number value constaints with error messages', () => {
+    const mSchema = new Schema({
+      value: {
+        type: Number,
+        min: [-5, 'Value shoule be greater or equal to -5'],
+        max: [50, 'Value should be less or equal to 50'],
+        required: [true, 'Value should be specified'],
+        default: 0,
+      },
+    }, { id: false, _id: false });
+
+    const jsonSchema = mSchema.jsonSchema('Sample');
+
+    assert.deepEqual(jsonSchema, {
+      title: 'Sample',
+      type: 'object',
+      properties: {
+        value: {
+          type: 'number',
+          minimum: -5,
+          maximum: 50,
+          default: 0,
+        },
+      },
+      required: ['value'],
+    });
+  });
+
+  it('should correctly translate number value constaints with error messages (not requires)', () => {
+    const mSchema = new Schema({
+      value: {
+        type: Number,
+        min: [-5, 'Value shoule be greater or equal to -5'],
+        max: [50, 'Value should be less or equal to 50'],
+        required: [false, 'Value is not required'],
+        default: 0,
+      },
+    }, { id: false, _id: false });
+
+    const jsonSchema = mSchema.jsonSchema('Sample');
+
+    assert.deepEqual(jsonSchema, {
+      title: 'Sample',
+      type: 'object',
+      properties: {
+        value: {
+          type: 'number',
+          minimum: -5,
+          maximum: 50,
+          default: 0,
+        },
+      },
+    });
+  });
+
   it('should correctly translate string value constaints', () => {
     const mSchema = new Schema({
       valueFromList: {
@@ -591,6 +646,45 @@ describe('schema.jsonSchema', () => {
         maxLength: 30,
       },
       value: { type: String, match: /^(?:H|h)ello, .+$/ },
+    }, { id: false, _id: false });
+
+    const jsonSchema = mSchema.jsonSchema('Sample');
+
+    assert.deepEqual(jsonSchema, {
+      title: 'Sample',
+      type: 'object',
+      properties: {
+        valueFromList: {
+          type: 'string',
+          enum: ['red', 'green', 'yellow'],
+        },
+        value20_30: {
+          type: 'string',
+          minLength: 20,
+          maxLength: 30,
+        },
+        value: {
+          type: 'string',
+          pattern: '^(?:H|h)ello, .+$',
+        },
+      },
+      required: ['valueFromList'],
+    });
+  });
+
+  it('should correctly translate string value constaints with error message', () => {
+    const mSchema = new Schema({
+      valueFromList: {
+        type: String,
+        enum: ['red', 'green', 'yellow'],
+        required: true,
+      },
+      value20_30: {
+        type: String,
+        minLength: [20, 'Value should have at least 20 characters'],
+        maxLength: [30, 'Value should not be longer then 30 characters'],
+      },
+      value: { type: String, match: [/^(?:H|h)ello, .+$/, 'Value should start from greating'] },
     }, { id: false, _id: false });
 
     const jsonSchema = mSchema.jsonSchema('Sample');
