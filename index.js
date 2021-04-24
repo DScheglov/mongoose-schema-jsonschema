@@ -1,4 +1,3 @@
-
 const schema_jsonSchema = require('./lib/schema');
 const model_jsonSchema = require('./lib/model');
 const query_jsonSchema = require('./lib/query');
@@ -19,6 +18,8 @@ module.exports = function moduleFactory(mongoose) {
 
   Types.Embedded.prototype.jsonSchema = types.mixed_jsonSchema;
   Types.Mixed.prototype.jsonSchema = types.mixed_jsonSchema;
+
+  Types.Map.prototype.jsonSchema = types.map_jsonSchema;
 
   mongoose.Schema.prototype.jsonSchema = schema_jsonSchema;
   mongoose.Model.jsonSchema = model_jsonSchema;

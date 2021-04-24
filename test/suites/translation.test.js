@@ -766,4 +766,74 @@ describe('schema.jsonSchema', () => {
       },
     });
   });
+
+  it('should correctly transform Map type (String)', () => {
+    const mS = new Schema({
+      m: { type: Map, of: String },
+    });
+
+    const jsonSchema = mS.jsonSchema('Sample');
+
+    assert.deepEqual(jsonSchema, {
+      title: 'Sample',
+      type: 'object',
+      properties: {
+        m: {
+          type: 'object',
+          additionalProperties: { type: 'string' },
+        },
+        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' },
+      },
+    });
+  });
+
+  it('should correctly transform Map type (Mixed)', () => {
+    const mS = new Schema({
+      m: Map,
+    });
+
+    const jsonSchema = mS.jsonSchema('Sample');
+
+    assert.deepEqual(jsonSchema, {
+      title: 'Sample',
+      type: 'object',
+      properties: {
+        m: {
+          type: 'object',
+          additionalProperties: { type: {} },
+        },
+        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' },
+      },
+    });
+  });
+
+  it('should correctly transform Map type (SubSchema)', () => {
+    const mS = new Schema({
+      m: {
+        type: Map,
+        of: new Schema({
+          x: Number,
+          y: String,
+        }, { _id: false }),
+      },
+    });
+
+    const jsonSchema = mS.jsonSchema('Sample');
+
+    assert.deepEqual(jsonSchema, {
+      title: 'Sample',
+      type: 'object',
+      properties: {
+        m: {
+          type: 'object',
+          additionalProperties: {
+            title: 'itemOf_m',
+            type: 'object',
+            properties: { x: { type: 'number' }, y: { type: 'string' } },
+          },
+        },
+        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' },
+      },
+    });
+  });
 });
