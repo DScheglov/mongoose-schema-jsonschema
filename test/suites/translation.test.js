@@ -787,6 +787,31 @@ describe('schema.jsonSchema', () => {
     });
   });
 
+  it('should correctly transform Map type (String, required: false)', () => {
+    const mS = mongoose.Schema({
+      name: { type: String },
+      language: {
+        type: Map,
+        of: { type: String },
+      },
+    });
+
+    const jsonSchema = mS.jsonSchema('Sample');
+
+    assert.deepEqual(jsonSchema, {
+      title: 'Sample',
+      type: 'object',
+      properties: {
+        name: { type: 'string' },
+        language: {
+          type: 'object',
+          additionalProperties: { type: 'string' },
+        },
+        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' },
+      },
+    });
+  });
+
   it('should correctly transform Map type (Mixed)', () => {
     const mS = new Schema({
       m: Map,
