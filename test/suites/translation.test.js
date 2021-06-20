@@ -861,4 +861,27 @@ describe('schema.jsonSchema', () => {
       },
     });
   });
+
+  it('should correctly transform additionalProperties boolean', () => {
+    const mS = new Schema({
+      m: {
+        type: Map,
+        additionalProperties: true
+      },
+    });
+
+    const jsonSchema = mS.jsonSchema('Sample');
+
+    assert.deepEqual(jsonSchema, {
+      title: 'Sample',
+      type: 'object',
+      properties: {
+        m: {
+          type: 'object',
+          additionalProperties: true
+        },
+        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' },
+      },
+    });
+  });
 });
