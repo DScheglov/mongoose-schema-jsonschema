@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test-loc": "jest",
-    "test": "./test.sh"
+    "test": "./test.sh",
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",

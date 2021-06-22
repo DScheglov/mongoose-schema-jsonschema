@@ -40,13 +40,11 @@ PersonSchema.methods.Reverse = function Reverse(req, callback) {
   });
 };
 
-
 PersonSchema.statics.emailList = function emailList(req, callback) {
   this.find({}, { email: true }).sort('email').exec((err, results) => {
     if (err) return callback(err, null);
     return callback(null, results.map(p => p.email));
   });
 };
-
 
 module.exports = mongoose.model('Person', PersonSchema);

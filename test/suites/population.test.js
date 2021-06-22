@@ -1,4 +1,3 @@
-
 require('../../index')(require('mongoose'));
 const assert = require('assert');
 
@@ -85,7 +84,6 @@ describe('Population: Model.jsonSchema()', () => {
       },
     });
   });
-
 
   it('should build schema and populate array item with selected fields', () => {
     const jsonSchema = models.Book.jsonSchema('title author', {

@@ -14,4 +14,5 @@ const BookSchema = new Schema({
   },
 });
 
+// eslint-disable-next-line no-console
 console.dir(BookSchema.jsonSchema(), { depth: null });

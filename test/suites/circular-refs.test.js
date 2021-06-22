@@ -1,7 +1,5 @@
-
 const mongoose = require('../../index')(require('mongoose'));
 const assert = require('assert');
-
 
 describe('Circular refs: Schema.jsonSchema()', () => {
   it('should replace schema with $ref to it', () => {

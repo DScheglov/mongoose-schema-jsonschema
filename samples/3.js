@@ -14,5 +14,4 @@ const BookSchema = new Schema({
 const Book = mongoose.model('Book', BookSchema);
 const Q = Book.find().select('title').limit(5);
 
-
 console.dir(Q.jsonSchema(), { depth: null });

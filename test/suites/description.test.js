@@ -1,7 +1,5 @@
-
 const mongoose = require('../../index')(require('mongoose'));
 const assert = require('assert');
-
 
 describe('Description: Schema.jsonSchema()', () => {
   it('should add description when it is specified (as description)', () => {
@@ -49,7 +47,6 @@ describe('Description: Schema.jsonSchema()', () => {
 
     assert.equal(jsonSchema.properties.s.title, 'S');
   });
-
 
   it('should add title and description when they are specified', () => {
     const mSchema = new mongoose.Schema({

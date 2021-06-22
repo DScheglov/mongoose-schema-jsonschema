@@ -1,4 +1,3 @@
-
 const mongoose = require('../../index')(require('mongoose'));
 const assert = require('assert');
 
@@ -171,7 +170,6 @@ describe('Field selection: model.jsonSchema()', () => {
       },
     });
   });
-
 
   it('should build schema for fields of nested array explicitly included by array name (string)', () => {
     const jsonSchema = models.Book.jsonSchema('title comment');

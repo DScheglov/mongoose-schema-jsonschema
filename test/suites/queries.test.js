@@ -1,4 +1,3 @@
-
 require('../../index')(require('mongoose'));
 const assert = require('assert');
 
