@@ -825,7 +825,7 @@ describe('schema.jsonSchema', () => {
       properties: {
         m: {
           type: 'object',
-          additionalProperties: { type: {} },
+          additionalProperties: true,
         },
         _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' },
       },

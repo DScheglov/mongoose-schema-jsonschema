@@ -4,7 +4,6 @@ const assert = require('assert');
 
 const models = require('../models');
 
-
 describe('Validation: schema.jsonSchema()', () => {
   it('should build schema and validate numbers', () => {
     const mSchema = new mongoose.Schema({
@@ -218,7 +217,6 @@ describe('Validation: schema.jsonSchema()', () => {
 
     errors = validate({ s: 12 }, jsonSchema).errors;
     assert.equal(errors.length, 1);
-
 
     errors = validate({ _id: '564e0da0105badc887ef1d3e' }, jsonSchema).errors;
     assert.equal(errors.length, 0);
@@ -447,6 +445,61 @@ describe('Validation: schema.jsonSchema()', () => {
 
     errors = validate({ x: null }, jsonSchema).errors;
     assert.equal(errors.length, 0);
+  });
+
+  it('should build schema and validate Map types', () => {
+    const mSchema = new mongoose.Schema({
+      m: { type: Map, required: true },
+    }, { _id: false });
+
+    const jsonSchema = mSchema.jsonSchema();
+
+    assert.deepEqual(jsonSchema, {
+      type: 'object',
+      properties: {
+        m: {
+          type: 'object',
+          additionalProperties: true,
+        },
+      },
+      required: ['m'],
+    });
+
+    const isValid = data => validate(data, jsonSchema).errors.length === 0;
+
+    assert.ok(isValid({ m: { x: 1, y: 'string' } }));
+    assert.ok(isValid({ m: { } }));
+
+    assert.ok(!isValid({ y: null }));
+  });
+
+  it('should build schema and validate Map types (with subschema)', () => {
+    const mSchema = new mongoose.Schema({
+      m: { type: Map, required: true, of: { type: String } },
+    }, { _id: false });
+
+    const jsonSchema = mSchema.jsonSchema();
+
+    assert.deepEqual(jsonSchema, {
+      type: 'object',
+      properties: {
+        m: {
+          type: 'object',
+          additionalProperties: {
+            type: 'string',
+          },
+        },
+      },
+      required: ['m'],
+    });
+
+    const isValid = data => validate(data, jsonSchema).errors.length === 0;
+
+    assert.ok(isValid({ m: { x: 'x', y: 'y' } }));
+    assert.ok(isValid({ m: { } }));
+
+    assert.ok(!isValid({ m: { x: 1, y: 'string' } }));
+    assert.ok(!isValid({ y: null }));
   });
 });
 

@@ -4,7 +4,6 @@ const assert = require('assert');
 
 const models = require('../models');
 
-
 describe('Validation: schema.jsonSchema()', () => {
   it('should build schema and validate numbers', () => {
     const mSchema = new mongoose.Schema({
@@ -329,6 +328,63 @@ describe('Validation: schema.jsonSchema()', () => {
     assert.ok(isValid({ }));
     assert.ok(isValid({ x: null }));
 
+    assert.ok(!isValid({ y: null }));
+  });
+
+  it('should build schema and validate Map types', () => {
+    const mSchema = new mongoose.Schema({
+      m: { type: Map, required: true },
+    }, { _id: false });
+
+    const jsonSchema = mSchema.jsonSchema();
+
+    assert.deepEqual(jsonSchema, {
+      type: 'object',
+      properties: {
+        m: {
+          type: 'object',
+          additionalProperties: true,
+        },
+      },
+      required: ['m'],
+    });
+
+    const ajv = new Ajv();
+    const isValid = data => ajv.validate(jsonSchema, data);
+
+    assert.ok(isValid({ m: { x: 1, y: 'string' } }));
+    assert.ok(isValid({ m: { } }));
+
+    assert.ok(!isValid({ y: null }));
+  });
+
+  it('should build schema and validate Map types (with subschema)', () => {
+    const mSchema = new mongoose.Schema({
+      m: { type: Map, required: true, of: { type: String } },
+    }, { _id: false });
+
+    const jsonSchema = mSchema.jsonSchema();
+
+    assert.deepEqual(jsonSchema, {
+      type: 'object',
+      properties: {
+        m: {
+          type: 'object',
+          additionalProperties: {
+            type: 'string',
+          },
+        },
+      },
+      required: ['m'],
+    });
+
+    const ajv = new Ajv();
+    const isValid = data => ajv.validate(jsonSchema, data);
+
+    assert.ok(isValid({ m: { x: 'x', y: 'y' } }));
+    assert.ok(isValid({ m: { } }));
+
+    assert.ok(!isValid({ m: { x: 1, y: 'string' } }));
     assert.ok(!isValid({ y: null }));
   });
 });
