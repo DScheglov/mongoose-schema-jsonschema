@@ -1,5 +1,6 @@
 /* eslint-disable func-names */
 const mongoose = require('../../index')(require('mongoose'));
+const isV6pl = require('mongoose/package.json').version > '6';
 
 const { Schema } = mongoose;
 const assert = require('assert');
@@ -229,6 +230,7 @@ describe('schema.jsonSchema', () => {
           title: 'embededDoc',
           type: 'object',
           properties: {
+            ...(isV6pl ? { _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' } } : undefined),
             n: { type: 'number' },
             s: { type: 'string' },
             d: { type: 'string', format: 'date-time' },
@@ -370,6 +372,7 @@ describe('schema.jsonSchema', () => {
           title: 'rNestedDoc',
           type: 'object',
           properties: {
+            ...(isV6pl ? { _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' } } : undefined),
             n: { type: 'number' },
             s: { type: 'string' },
           },
@@ -495,6 +498,7 @@ describe('schema.jsonSchema', () => {
           title: 'xyz',
           type: 'object',
           properties: {
+            ...(isV6pl ? { _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' } } : undefined),
             x: {
               type: 'array',
               minItems: 1,

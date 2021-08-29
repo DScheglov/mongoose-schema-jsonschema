@@ -16,7 +16,14 @@ module.exports = function moduleFactory(mongoose) {
   Types.Array.prototype.jsonSchema = types.array_jsonSchema;
   Types.DocumentArray.prototype.jsonSchema = types.array_jsonSchema;
 
-  Types.Embedded.prototype.jsonSchema = types.mixed_jsonSchema;
+  if (Types.Embedded) {
+    Types.Embedded.prototype.jsonSchema = types.mixed_jsonSchema;
+  }
+
+  if (Types.Subdocument) {
+    Types.Subdocument.prototype.jsonSchema = types.mixed_jsonSchema;
+  }
+
   Types.Mixed.prototype.jsonSchema = types.mixed_jsonSchema;
 
   Types.Map.prototype.jsonSchema = types.map_jsonSchema;
