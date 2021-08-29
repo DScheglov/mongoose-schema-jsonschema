@@ -362,6 +362,7 @@ newSchemaType.prototype.jsonSchema = function() {
  - version 1.4.0 - **broken** - schema build configurations (`forceRebuild` and `fieldOptionsMapping`)
  - version 1.4.2 - fix for broken version 1.4.0 [issue#22](https://github.com/DScheglov/mongoose-schema-jsonschema/issues/22)
  - version 1.4.4 - fix for field constaints [issue#25](https://github.com/DScheglov/mongoose-schema-jsonschema/issues/25)
+ - version 2.0.0 - Support for mongoose@6.x.x. Node v8.x.x, v9.x.x are no longer supported (use v1.4.7 of the lib)
 
  
 ## Supported versions
