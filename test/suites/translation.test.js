@@ -172,6 +172,31 @@ describe('schema.jsonSchema', () => {
     });
   });
 
+  it('should correctly translate all simmple types when required is a function', () => {
+    const mSchema = new Schema({
+      n: { type: Number, required: x => x },
+      s: { type: String, required: x => x },
+      d: { type: Date, required: x => x },
+      b: { type: Boolean, required: x => x },
+      u: { type: Schema.Types.ObjectId, required: x => x },
+    });
+
+    const jsonSchema = mSchema.jsonSchema('Sample');
+
+    assert.deepEqual(jsonSchema, {
+      title: 'Sample',
+      type: 'object',
+      properties: {
+        n: { type: 'number' },
+        s: { type: 'string' },
+        d: { type: 'string', format: 'date-time' },
+        b: { type: 'boolean' },
+        u: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' },
+        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' },
+      },
+    });
+  });
+
   it('should correctly translate all simmple types in embedded doc', () => {
     const mSchema = new Schema({
       embededDoc: {
