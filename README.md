@@ -365,5 +365,5 @@ newSchemaType.prototype.jsonSchema = function() {
 
  
 ## Supported versions
-  - node.js: 8.x, 9.x, 10.x, 12.x
-  - mongoose: 5.x
+  - node.js: 10.x, 12.x, 14.x
+  - mongoose: 5.x, 6.x
