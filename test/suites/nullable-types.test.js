@@ -1,4 +1,5 @@
 const { Schema } = require('../../index')(require('mongoose'));
+const isV6pl = require('mongoose/package.json').version > '6';
 const assert = require('assert');
 
 describe('nullable: schema.jsonSchema', () => {
@@ -60,6 +61,7 @@ describe('nullable: schema.jsonSchema', () => {
           type: ['object', 'null'],
           default: null,
           properties: {
+            ...(isV6pl ? { _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' } } : undefined),
             x: {
               type: 'array',
               minItems: 1,
@@ -116,6 +118,7 @@ describe('nullable: schema.jsonSchema', () => {
                 type: 'object',
                 title: 'itemOf_t',
                 properties: {
+                  ...(isV6pl ? { _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' } } : undefined),
                   x: { type: 'number' },
                   y: { type: 'number' },
                 },

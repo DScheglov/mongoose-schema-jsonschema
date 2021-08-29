@@ -1,12 +1,12 @@
 language: node_js
 node_js:
-  - "8"
-  - "9"
   - "10"
   - "12"
+  - "14"
 
 env:
   - MONGOOSE_VERSION=5
+  - MONGOOSE_VERSION=6
 
 install:
   - npm install
