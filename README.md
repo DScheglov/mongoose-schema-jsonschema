@@ -1,7 +1,6 @@
-[![Build status](https://travis-ci.org/DScheglov/mongoose-schema-jsonschema.svg?branch=master)](https://travis-ci.org/DScheglov/mongoose-schema-jsonschema)
+![Build Status](https://github.com/DScheglov/mongoose-schema-jsonschema/actions/workflows/run-tests.yml/badge.svg?branch=feature/support-for-monggose-7)
 [![Coverage Status](https://coveralls.io/repos/github/DScheglov/mongoose-schema-jsonschema/badge.svg?branch=master)](https://coveralls.io/github/DScheglov/)
 [![npm downloads](https://img.shields.io/npm/dm/mongoose-schema-jsonschema)](https://www.npmjs.com/package/mongoose-schema-jsonschema)
-[![David](https://img.shields.io/david/DScheglov/mongoose-schema-jsonschema)](https://www.npmjs.com/package/mongoose-schema-jsonschema)
 [![NPM](https://img.shields.io/npm/l/mongoose-schema-jsonschema)](https://github.com/DScheglov/mongoose-schema-jsonschema/blob/master/LICENSE)
 
 # mongoose-schema-jsonschema
@@ -11,23 +10,28 @@ The module allows to create json schema from Mongoose schema by adding
 classes
 
 ## Contents
- - [Installation](#installation)
- - [Schema Build Configuration](#schema-build-configuration)
- - [Samples](#samples)
- - [Validation tools](#validation-tools)
- - [Specifications](#specifications)
- - [Custom Schema Types Support](#custom-schema-types-support)
- - [Releases](#releases)
- - [Supported Versions](#supported-versions)
- 
+
+- [mongoose-schema-jsonschema](#mongoose-schema-jsonschema)
+  - [Contents](#contents)
+  - [Installation](#installation)
+  - [Schema Build Configuration](#schema-build-configuration)
+  - [Samples](#samples)
+  - [Validation tools](#validation-tools)
+  - [Specifications](#specifications)
+    - [mongoose.Schema.prototype.jsonSchema](#mongooseschemaprototypejsonschema)
+    - [mongoose.Model.jsonSchema](#mongoosemodeljsonschema)
+    - [mongoose.Query.prototype.jsonSchema](#mongoosequeryprototypejsonschema)
+  - [Custom Schema Types Support](#custom-schema-types-support)
+  - [Releases](#releases)
+  - [Supported versions](#supported-versions)
 
 -----------------
 
 ## Installation
+
 ```shell
 npm install mongoose-schema-jsonschema
 ```
-
 
 ## Schema Build Configuration
 
@@ -76,6 +80,7 @@ console.dir(BookSchema.jsonSchema(), { depth: null });
 ```
 
 **Output**:
+
 ```js
 {
   type: 'object',
@@ -99,12 +104,10 @@ console.dir(BookSchema.jsonSchema(), { depth: null });
 }
 ```
 
-
-
-
 ## Samples
 
 Let's build json schema from simple mongoose schema
+
 ```javascript
 const mongoose = require('mongoose');
 require('mongoose-schema-jsonschema')(mongoose);
@@ -245,14 +248,17 @@ console.dir(Q.jsonSchema(), { depth: null });
 ```
 
 ## Validation tools
+
 Created by **mongoose-schema-jsonschema** json-schema's could be used for
 document validation with:
- - [`ajv`](https://www.npmjs.com/package/ajv)
- - [`jsonschema`](https://www.npmjs.com/package/jsonschema)
+
+- [`ajv`](https://www.npmjs.com/package/ajv)
+- [`jsonschema`](https://www.npmjs.com/package/jsonschema)
 
 ## Specifications
 
 ### mongoose.Schema.prototype.jsonSchema
+
 Builds the json schema based on the Mongooose schema.
 if schema has been already built the method returns new deep copy
 
@@ -260,32 +266,36 @@ Method considers the `schema.options.toJSON.virtuals` to included
 the virtual paths (without detailed description)
 
 Declaration:
+
 ```javascript
 function schema_jsonSchema(name) { ... }
 ```
 
 Parameters:
- - **name**: `String` -  Name of the object
- - *Returns* `Object` - json schema
 
+- **name**: `String` -  Name of the object
+- *Returns* `Object` - json schema
 
 ### mongoose.Model.jsonSchema
+
 Builds json schema for model considering the selection and population
 
 if `fields` specified the method removes `required` constraints
 
 Declaration:
+
 ```javascript
 function model_jsonSchema(fields, populate) { ... }
 ```
 
  Parameters:
- - **fields**: `String`|`Array`|`Object` - mongoose selection object
- - **populate**: `String`|`Object` - mongoose population options
- - *Returns* `Object` - json schema
 
+- **fields**: `String`|`Array`|`Object` - mongoose selection object
+- **populate**: `String`|`Object` - mongoose population options
+- *Returns* `Object` - json schema
 
- ### mongoose.Query.prototype.jsonSchema
+### mongoose.Query.prototype.jsonSchema
+
  Builds json schema considering the query type and query options.
  The method returns the schema for array if query type is `find` and
  the schema for single document if query type is `findOne` or `findOneAnd*`.
@@ -295,13 +305,14 @@ function model_jsonSchema(fields, populate) { ... }
  of the appropriate model.
 
  Declaration:
+
  ```javascript
  function query_jsonSchema() { ... }
  ```
 
   Parameters:
-  - *Returns* `Object` - json schema
 
+- *Returns* `Object` - json schema
 
 ## Custom Schema Types Support
 
@@ -341,30 +352,32 @@ newSchemaType.prototype.jsonSchema = function() {
 ```
 
 ## Releases
- - version 1.0 - Basic functionality
- - version 1.1 - Mongoose.Query support implemented
- - version 1.1.5 - uuid issue fixed, ajv compliance verified
- - version 1.1.8 - Schema.Types.Mixed issue fixed
- - version 1.1.9 - readonly settings support added
- - version 1.1.11 - required issue fixed [issue#2](https://github.com/DScheglov/mongoose-schema-jsonschema/issues/2)
- - version 1.1.12 - mixed-type fields description and title support added (fix for issue: [issue#3](https://github.com/DScheglov/mongoose-schema-jsonschema/issues/3))
- - version 1.1.15 - support for mongoose@5.x ensured [issue#8](https://github.com/DScheglov/mongoose-schema-jsonschema/issues/8)
- - version 1.3.0
-   - nullable types support (as union: `[type, 'null']`)
-   - `examples` option support [issue#14](https://github.com/DScheglov/mongoose-schema-jsonschema/issues/14) 
-   - support for fields dynamicly marked as `required` [issue#16](https://github.com/DScheglov/mongoose-schema-jsonschema/issues/16)
-   - Node support restricted to 8.x, 9.x, 10.x, 12.x
-   - Monggose support restricted to 5.x
-   - _Development_:
-     - migrated from `mocha` + `istanbul` to `jest`
-     - added `eslint`
- - version 1.3.1 - support `minlenght` and `maxlength` [issue#21](https://github.com/DScheglov/mongoose-schema-jsonschema/issues/21)
- - version 1.4.0 - **broken** - schema build configurations (`forceRebuild` and `fieldOptionsMapping`)
- - version 1.4.2 - fix for broken version 1.4.0 [issue#22](https://github.com/DScheglov/mongoose-schema-jsonschema/issues/22)
- - version 1.4.4 - fix for field constaints [issue#25](https://github.com/DScheglov/mongoose-schema-jsonschema/issues/25)
- - version 2.0.0 - Support for mongoose@6.x.x. Node v8.x.x, v9.x.x are no longer supported (use v1.4.7 of the lib)
 
- 
+- version 1.0 - Basic functionality
+- version 1.1 - Mongoose.Query support implemented
+- version 1.1.5 - uuid issue fixed, ajv compliance verified
+- version 1.1.8 - Schema.Types.Mixed issue fixed
+- version 1.1.9 - readonly settings support added
+- version 1.1.11 - required issue fixed [issue#2](https://github.com/DScheglov/mongoose-schema-jsonschema/issues/2)
+- version 1.1.12 - mixed-type fields description and title support added (fix for issue: [issue#3](https://github.com/DScheglov/mongoose-schema-jsonschema/issues/3))
+- version 1.1.15 - support for <mongoose@5.x> ensured [issue#8](https://github.com/DScheglov/mongoose-schema-jsonschema/issues/8)
+- version 1.3.0
+  - nullable types support (as union: `[type, 'null']`)
+  - `examples` option support [issue#14](https://github.com/DScheglov/mongoose-schema-jsonschema/issues/14)
+  - support for fields dynamicly marked as `required` [issue#16](https://github.com/DScheglov/mongoose-schema-jsonschema/issues/16)
+  - Node support restricted to 8.x, 9.x, 10.x, 12.x
+  - Mongoose support restricted to 5.x
+  - *Development*:
+    - migrated from `mocha` + `istanbul` to `jest`
+    - added `eslint`
+- version 1.3.1 - support `minlenght` and `maxlength` [issue#21](https://github.com/DScheglov/mongoose-schema-jsonschema/issues/21)
+- version 1.4.0 - **broken** - schema build configurations (`forceRebuild` and `fieldOptionsMapping`)
+- version 1.4.2 - fix for broken version 1.4.0 [issue#22](https://github.com/DScheglov/mongoose-schema-jsonschema/issues/22)
+- version 1.4.4 - fix for field constaints [issue#25](https://github.com/DScheglov/mongoose-schema-jsonschema/issues/25)
+- version 2.0.0 - Support for <mongoose@6.x.x>. Node v8.x.x, v9.x.x are no longer supported (use v1.4.7 of the lib)
+- version 2.1.0 - Support for <mongoose@7.x.x> and Node v14.x, v16.x, v18.x
+
 ## Supported versions
-  - node.js: 10.x, 12.x, 14.x
-  - mongoose: 5.x, 6.x
+
+- node.js: 14.x, 16.x, 18.x
+- mongoose: 5.x, 6.x, 7.x
