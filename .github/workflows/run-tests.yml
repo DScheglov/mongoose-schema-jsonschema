@@ -1,0 +1,74 @@
+name: Run Tests
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    name: Test on Node ${{ matrix.node }} on ubuntu-latest with Mongoose@${{ matrix.mongoose }}
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        node: [14, 16, 18]
+        mongoose: [5, 6, 7]
+
+    steps:
+      - name: Clone repo
+        uses: actions/checkout@v2
+
+      - name: Set Node.js version
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Install dependencies
+        run: |
+          npm install
+          npm install mongoose@${{ matrix.mongoose }}
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Test with Coverage
+        run: npm run test
+
+      - name: Publish on Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          flag-name: node-${{ matrix.node }}
+          parallel: true
+
+  report-coverage:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+    - name: Coveralls Finished
+      uses: coverallsapp/github-action@master
+      with:
+        github-token: ${{ secrets.github_token }}
+        parallel-finished: true
+  
+  publish:
+    needs: report-coverage
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+    steps:
+      - name: Clone repo
+        uses: actions/checkout@v2
+
+      - name: Set Node.js version
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16
+
+      - name: Check Version
+        run: ./version.sh
+
+      - name: Publish to npm
+        run: |
+          cp .npmrc.config .npmrc
+          npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
