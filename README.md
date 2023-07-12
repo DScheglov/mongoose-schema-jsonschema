@@ -1,4 +1,4 @@
-![Build Status](https://github.com/DScheglov/mongoose-schema-jsonschema/actions/workflows/run-tests.yml/badge.svg?branch=feature/support-for-monggose-7)
+![Build Status](https://github.com/DScheglov/mongoose-schema-jsonschema/actions/workflows/run-tests.yml/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/github/DScheglov/mongoose-schema-jsonschema/badge.svg?branch=master)](https://coveralls.io/github/DScheglov/)
 [![npm downloads](https://img.shields.io/npm/dm/mongoose-schema-jsonschema)](https://www.npmjs.com/package/mongoose-schema-jsonschema)
 [![NPM](https://img.shields.io/npm/l/mongoose-schema-jsonschema)](https://github.com/DScheglov/mongoose-schema-jsonschema/blob/master/LICENSE)
