@@ -4,8 +4,8 @@
   "description": "Mongoose extention that allows to build json schema for mongoose models, schemas and queries",
   "main": "index.js",
   "scripts": {
-    "test-loc": "jest",
-    "test": "./test.sh",
+    "coveralls": "./coveralls.sh",
+    "test": "jest",
     "lint": "eslint ."
   },
   "repository": {
