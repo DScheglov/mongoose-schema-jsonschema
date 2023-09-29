@@ -98,6 +98,42 @@ describe('Validation: schema.jsonSchema()', () => {
     assert.ok(!isValid({ s: '' }));
   });
 
+  it('should build schema and validate strings with enum and error message', () => {
+    const mSchema = new mongoose.Schema({
+      s: {
+        type: String,
+        enum: {
+          values: ['1', '2', '3'],
+          message: '{VALUE} is not supported',
+        },
+      },
+    });
+
+    const jsonSchema = mSchema.jsonSchema();
+
+    assert.deepEqual(jsonSchema, {
+      type: 'object',
+      properties: {
+        s: {
+          type: 'string',
+          enum: ['1', '2', '3'],
+        },
+        _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' },
+      },
+    });
+
+    const ajv = new Ajv();
+    const isValid = data => ajv.validate(jsonSchema, data);
+
+    assert.ok(isValid({ s: '1' }));
+    assert.ok(isValid({ s: '2' }));
+    assert.ok(isValid({ s: '3' }));
+    assert.ok(!isValid({ s: '4' }));
+    assert.ok(!isValid({ s: '0' }));
+    assert.ok(!isValid({ s: 1 }));
+    assert.ok(!isValid({ s: '' }));
+  });
+
   it('should build schema and validate strings with regExp', () => {
     const mSchema = new mongoose.Schema({
       s: { type: String, match: /^(abc|bac|cab)$/ },
