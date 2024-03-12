@@ -75,7 +75,7 @@ const fieldOptionsMapping = {
 config({ fieldOptionsMapping });
 console.dir(BookSchema.jsonSchema(), { depth: null });
 
-config({ fieldOptionsMapping: [], forceRebuild: true }); // reseting
+config({ fieldOptionsMapping: [], forceRebuild: true }); // reset
 console.dir(BookSchema.jsonSchema(), { depth: null });
 ```
 
@@ -211,9 +211,9 @@ console.dir(Book.jsonSchema('', 'author'), { depth: null });
 
 ```javascript
 const mongoose = require('mongoose');
-const extendMongooose = require('mongoose-schema-jsonschema');
+const extendMongoose = require('mongoose-schema-jsonschema');
 
-extendMongooose(mongoose);
+extendMongoose(mongoose);
 
 const { Schema } = mongoose;
 
@@ -259,7 +259,7 @@ document validation with:
 
 ### mongoose.Schema.prototype.jsonSchema
 
-Builds the json schema based on the Mongooose schema.
+Builds the json schema based on the Mongoose schema.
 if schema has been already built the method returns new deep copy
 
 Method considers the `schema.options.toJSON.virtuals` to included
@@ -373,11 +373,12 @@ newSchemaType.prototype.jsonSchema = function() {
 - version 1.3.1 - support `minlenght` and `maxlength` [issue#21](https://github.com/DScheglov/mongoose-schema-jsonschema/issues/21)
 - version 1.4.0 - **broken** - schema build configurations (`forceRebuild` and `fieldOptionsMapping`)
 - version 1.4.2 - fix for broken version 1.4.0 [issue#22](https://github.com/DScheglov/mongoose-schema-jsonschema/issues/22)
-- version 1.4.4 - fix for field constaints [issue#25](https://github.com/DScheglov/mongoose-schema-jsonschema/issues/25)
+- version 1.4.4 - fix for field constraints [issue#25](https://github.com/DScheglov/mongoose-schema-jsonschema/issues/25)
 - version 2.0.0 - Support for <mongoose@6.x.x>. Node v8.x.x, v9.x.x are no longer supported (use v1.4.7 of the lib)
 - version 2.1.0 - Support for <mongoose@7.x.x> and Node v14.x, v16.x, v18.x
+- version 2.2.0 - Support for <mongoose@8.x.x> and Node v20.x
 
 ## Supported versions
 
-- node.js: 14.x, 16.x, 18.x
-- mongoose: 5.x, 6.x, 7.x
+- node.js: 14.x, 16.x, 18.x, 20.x
+- mongoose: 5.x, 6.x, 7.x, 8.x
