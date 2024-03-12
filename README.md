@@ -376,9 +376,9 @@ newSchemaType.prototype.jsonSchema = function() {
 - version 1.4.4 - fix for field constraints [issue#25](https://github.com/DScheglov/mongoose-schema-jsonschema/issues/25)
 - version 2.0.0 - Support for <mongoose@6.x.x>. Node v8.x.x, v9.x.x are no longer supported (use v1.4.7 of the lib)
 - version 2.1.0 - Support for <mongoose@7.x.x> and Node v14.x, v16.x, v18.x
-- version 2.2.0 - Support for <mongoose@8.x.x> and Node v20.x
+- version 2.2.0 - Support for <mongoose@8.x.x> and Node v20.x. Node v14.x is no longer supported (use v2.1.0 of the lib)
 
 ## Supported versions
 
-- node.js: 14.x, 16.x, 18.x, 20.x
+- node.js: 16.x, 18.x, 20.x
 - mongoose: 5.x, 6.x, 7.x, 8.x

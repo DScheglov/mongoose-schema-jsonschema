@@ -10,7 +10,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node: [14, 16, 18, 20]
+        node: [16, 18, 20]
         mongoose: [5, 6, 7, 8]
 
     steps:
@@ -61,7 +61,7 @@ jobs:
       - name: Set Node.js version
         uses: actions/setup-node@v1
         with:
-          node-version: 16
+          node-version: 20
 
       - name: Check Version
         run: ./version.sh
