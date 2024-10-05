@@ -11,12 +11,18 @@ describe('schema.jsonSchema', () => {
         required: true,
         unique: true,
       },
+      year: {
+        type: Number,
+        required: true,
+      },
       description: {
         type: String,
       },
       internalName: {
         type: String,
-        required: true,
+        required() {
+          return this.year > 2000;
+        },
         unique: true,
       },
       manage: {
@@ -43,6 +49,9 @@ describe('schema.jsonSchema', () => {
       properties: {
         name: {
           type: 'string',
+        },
+        year: {
+          type: 'number',
         },
         description: {
           type: 'string',
@@ -72,7 +81,7 @@ describe('schema.jsonSchema', () => {
       },
       required: [
         'name',
-        'internalName',
+        'year',
       ],
     });
   });
