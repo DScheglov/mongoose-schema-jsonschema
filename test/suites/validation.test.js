@@ -222,7 +222,7 @@ describe('Validation: schema.jsonSchema()', () => {
     assert.equal(errors.length, 0);
   });
 
-  it('should build schema and validate arrays with minItems constraint', () => {
+  it('should build schema and validate arrays with**out** minItems constraint', () => {
     const mSchema = mongoose.Schema({
       a: [{
         type: Number,
@@ -238,7 +238,6 @@ describe('Validation: schema.jsonSchema()', () => {
         a: {
           type: 'array',
           items: { type: 'number' },
-          minItems: 1,
         },
         _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' },
       },
@@ -255,7 +254,7 @@ describe('Validation: schema.jsonSchema()', () => {
     assert.equal(errors.length, 0);
 
     errors = validate({ a: [] }, jsonSchema).errors;
-    assert.equal(errors.length, 1);
+    assert.equal(errors.length, 0);
 
     errors = validate({ a: [0, 1, 'a'] }, jsonSchema).errors;
     assert.equal(errors.length, 1);

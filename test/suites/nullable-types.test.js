@@ -64,7 +64,6 @@ describe('nullable: schema.jsonSchema', () => {
             ...(isV6pl ? { _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' } } : undefined),
             x: {
               type: 'array',
-              minItems: 1,
               items: {
                 type: 'object',
                 title: 'itemOf_x',

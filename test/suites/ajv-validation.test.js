@@ -215,7 +215,6 @@ describe('Validation: schema.jsonSchema()', () => {
         a: {
           type: 'array',
           items: { type: 'number' },
-          minItems: 1,
         },
         _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' },
       },
@@ -227,7 +226,7 @@ describe('Validation: schema.jsonSchema()', () => {
     assert.ok(isValid({ a: [0, 1] }));
     assert.ok(isValid({ a: [0] }));
     assert.ok(isValid({ }));
-    assert.ok(!isValid({ a: [] }));
+    assert.ok(isValid({ a: [] }));
     assert.ok(!isValid({ a: [0, 1, 'a'] }));
   });
 

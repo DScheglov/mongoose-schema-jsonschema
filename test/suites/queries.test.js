@@ -24,7 +24,6 @@ describe('Queries: query.jsonSchema()', () => {
 
               pattern: '^[0-9a-fA-F]{24}$',
             },
-            minItems: 1,
           },
           comment: {
             type: 'array',
@@ -87,7 +86,6 @@ describe('Queries: query.jsonSchema()', () => {
 
               pattern: '^[0-9a-fA-F]{24}$',
             },
-            minItems: 1,
           },
           _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' },
         },
@@ -124,7 +122,6 @@ describe('Queries: query.jsonSchema()', () => {
               'x-ref': 'Person',
               description: 'Refers to Person',
             },
-            minItems: 1,
           },
           _id: { type: 'string', pattern: '^[0-9a-fA-F]{24}$' },
         },

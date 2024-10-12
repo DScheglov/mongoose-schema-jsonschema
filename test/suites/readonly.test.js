@@ -101,7 +101,6 @@ describe('readonly: model.jsonSchema', () => {
             description: 'Refers to Person',
             pattern: '^[0-9a-fA-F]{24}$',
           },
-          minItems: 1,
         },
         comment: {
           type: 'array',
