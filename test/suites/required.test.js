@@ -29,7 +29,7 @@ describe('Required fields: schema.jsonSchema', () => {
           function () {
             return this.year > 2000;
           },
-          'Internal name is required',
+          'Author is required if year > 2000',
         ],
       },
     }, { _id: false });

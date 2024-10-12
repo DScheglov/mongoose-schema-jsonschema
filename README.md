@@ -377,6 +377,7 @@ newSchemaType.prototype.jsonSchema = function() {
 - version 2.0.0 - Support for <mongoose@6.x.x>. Node v8.x.x, v9.x.x are no longer supported (use v1.4.7 of the lib)
 - version 2.1.0 - Support for <mongoose@7.x.x> and Node v14.x, v16.x, v18.x
 - version 2.2.0 - Support for <mongoose@8.x.x> and Node v20.x. Node v14.x is no longer supported (use v2.1.0 of the lib)
+- version 2.2.1 - fix for `required` fields: if `required` is a function, it is not considered as required field
 
 ## Supported versions
 
