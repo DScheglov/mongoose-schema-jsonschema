@@ -1,6 +1,6 @@
 {
   "name": "mongoose-schema-jsonschema",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "description": "Mongoose extension that allows to build json schema for mongoose models, schemas and queries",
   "main": "index.js",
   "scripts": {
