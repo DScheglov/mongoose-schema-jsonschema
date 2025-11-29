@@ -379,8 +379,11 @@ newSchemaType.prototype.jsonSchema = function() {
 - version 2.2.0 - Support for <mongoose@8.x.x> and Node v20.x. Node v14.x is no longer supported (use v2.1.0 of the lib)
 - version 2.2.1 - fix for `required` fields: if `required` is a function, it is not considered as required field
 - version 3.0.0 - breaking changes on Array with `required`: the `minItems` constraint is removed from JSON schema
+- version 4.0.0
+  - Node support shifted to 18+
+  - Mongoose support restricted to 6+
 
 ## Supported versions
 
-- node.js: 16.x, 18.x, 20.x
-- mongoose: 5.x, 6.x, 7.x, 8.x
+- node.js: 18.x, 20.x, 22.x, 24.x
+- mongoose: 6.x, 7.x, 8.x, 9.x
