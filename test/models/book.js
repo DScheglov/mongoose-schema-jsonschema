@@ -10,10 +10,10 @@ const BookSchema = new Schema({
     index: true,
     required: true,
   },
-  comment: [{
+  comment: [new Schema({
     body: String,
     editor: { type: Schema.Types.ObjectId, required: true, ref: 'Person' },
-  }],
+  })],
   official: {
     slogan: String,
     announcement: String,

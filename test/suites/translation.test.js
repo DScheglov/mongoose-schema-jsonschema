@@ -262,10 +262,10 @@ describe('schema.jsonSchema', () => {
       ab: [Boolean],
       au: [Schema.Types.ObjectId],
       ar: [{ type: Schema.Types.ObjectId, ref: 'Book' }],
-      aNestedDoc: [{
+      aNestedDoc: [new Schema({
         n: Number,
         s: String,
-      }],
+      })],
       rn: { type: Number, required: true },
       rs: { type: String, required: true },
       rd: { type: Date, required: true },
