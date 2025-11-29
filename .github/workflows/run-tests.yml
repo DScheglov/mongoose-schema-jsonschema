@@ -33,25 +33,16 @@ jobs:
       - name: Test with Coverage
         run: npm run test
 
-      - name: Publish on Coveralls
-        uses: coverallsapp/github-action@master
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          flag-name: node-${{ matrix.node }}-mongoose-${{ matrix.mongoose }}
-          parallel: true
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: node-${{ matrix.node }},mongoose-${{ matrix.mongoose }}
 
-  report-coverage:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-    - name: Coveralls Finished
-      uses: coverallsapp/github-action@master
-      with:
-        github-token: ${{ secrets.github_token }}
-        parallel-finished: true
+  # Codecov handles parallel uploads automatically; no finish step needed
   
   publish:
-    needs: report-coverage
+    needs: test
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/v')
     steps:
