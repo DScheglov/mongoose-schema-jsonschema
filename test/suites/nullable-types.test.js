@@ -42,7 +42,7 @@ describe('nullable: schema.jsonSchema', () => {
           }],
           y: { type: mSchema2, required: true },
           z: { type: [mSchema3] },
-          t: { type: [{ x: Number, y: Number }], default: null },
+          t: { type: [new Schema({ x: Number, y: Number })], default: null },
           any: { type: Schema.Types.Mixed, required: true },
         },
         default: null,
