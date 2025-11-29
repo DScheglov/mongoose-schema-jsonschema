@@ -1,5 +1,5 @@
 ![Build Status](https://github.com/DScheglov/mongoose-schema-jsonschema/actions/workflows/run-tests.yml/badge.svg)
-[![Coverage Status](https://coveralls.io/repos/github/DScheglov/mongoose-schema-jsonschema/badge.svg?branch=master)](https://coveralls.io/github/DScheglov/)
+[![codecov](https://codecov.io/gh/DScheglov/mongoose-schema-jsonschema/graph/badge.svg?token=xsr0TGq1FF)](https://codecov.io/gh/DScheglov/mongoose-schema-jsonschema)
 [![npm downloads](https://img.shields.io/npm/dm/mongoose-schema-jsonschema)](https://www.npmjs.com/package/mongoose-schema-jsonschema)
 [![NPM](https://img.shields.io/npm/l/mongoose-schema-jsonschema)](https://github.com/DScheglov/mongoose-schema-jsonschema/blob/master/LICENSE)
 
